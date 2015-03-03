@@ -5,7 +5,9 @@ $conexion = mysql_connect($host,$user,$contrasena) or die ("Error al conectar co
 mysql_select_db($basedatos) or die ("Error al conectar con bases de datos: ".mysql_error());
 
 //SELECT pro_id FROM `proyecto` WHERE `pro_id` = 'PRDIMA02' 
-$sql = "SELECT pro_nombre FROM proyecto WHERE pro_id = '$_POST[codigoProy]' ";
+$Codig = $_POST['codigoProy'];
+
+$sql = "SELECT pro_nombre FROM proyecto WHERE pro_id = '$Codig' ";
 //('$_POST[codigoProy]','$_POST[nombreProy]', '$_POST[fechaIniProy]', '$_POST[fechafinProy]', '$_POST[montoProy]', '//$_POST[descripcionProy]', '123456','$_POST[estadoProy]')";
 
 $result = mysql_query($sql);
