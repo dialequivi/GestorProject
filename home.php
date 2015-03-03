@@ -93,17 +93,17 @@
             <td><p id="codProy" align="center"> </p></td>
             <td><p id="nameProy" align="center"> </p></td>
           </tr>
-          <tr>
+          <tr id="filaObj">
             <td><p id="codObjP" align="center"> </p></td>
             <td><p id="nameObjP" align="center"> </p></td>
             <td><p> <a class="btn btn-default" name="btnAddObj" id="btnAddObj" role="button" style="display:none;">Agregar Objetivo</a> </p></td>
           </tr>
-          <tr>
+          <tr id="filaMeta">
             <td><p id="codMetaP" align="center"> </p></td>
             <td><p id="nameMetaP" align="center"> </p></td>
             <td><p> <a class="btn btn-default" name="btnAddMeta" id="btnAddMeta" role="button" style="display:none;">Agregar Meta</a> </p></td>
           </tr>
-          <tr>
+          <tr id="filaActi">
             <td><p id="codActP" align="center"> </p></td>
             <td><p id="nameActP" align="center"> </p></td>
             <td><p> <a class="btn btn-default" name="btnAddActi" id="btnAddActi" role="button" style="display:none;">Agregar Actividad</a> </p></td>
