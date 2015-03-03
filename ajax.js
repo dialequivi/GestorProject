@@ -13,7 +13,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 	$('[name=btnRegistroNuevoActi]').click(primerActi);
 	
-	$('[name=btnAddObj]').click(aler);
+	$('[name=btnAddObj]').click(agregarObjetivo);
 
 
 
@@ -22,10 +22,43 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 	/**Métodos
 	==============================*/
-
-	function aler(){
+/*Agrega un nuevo objetivo a un proyecto ya creado
+*/
+	function agregarObjetivo(){
 		//alert("Agregar Objetivo");
-		$('#formNewObj').show("fast");
+
+		
+		$.ajax({
+            type: "POST",
+            url: 'php/ultimoCodigoObj.php',
+            data: {
+                datosFormulario: $.cookie('codAP'),
+                //"datosFormulario": JSON.stringify(datosRegistroProy1)
+            },
+            dataType: "html",
+            //timeout: 1000,
+            //beforeSend: function() {
+              //  alert('En breve se enviará la solicitud.');
+            //},
+            success: function(RespHTML) {
+                //$('#Mensaje').html(RespHTML);
+                alert(RespHTML);
+                $('#codigoObj').html( RespHTML ); 
+				$('#formNewObj').show("fast");
+
+				$('#filaMeta').hide("fast");
+				$('#filaActi').hide("fast");
+				
+				$('#btnAddMeta').hide("fast");
+				$('#btnAddActi').hide("fast");
+
+
+               
+            },
+            error: function() {
+                alert('Lo sentimos, se ha producido un error.');
+            }
+        });
 	}
 
 
@@ -37,6 +70,9 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 			url: 'php/verificaCodProy.php',
 			dataType: "html",
             data: $('#registrarProy').serialize(),
+            //data:{
+             //Codig: $('[name=codigoProy]').val()
+        	//},
             //beforeSend: function() {
             //  alert('Verificando código del proyecto.');
             //},
@@ -44,6 +80,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
               //  $(responde.mensaje);
             //},
             success: function(RespHTML) {
+            	//alert($('[name=codigoProy]').val());
             	var mens = RespHTML;
                 //$('#respon').html(RespHTML);
                 if(mens.search("no disponible") > -1){
