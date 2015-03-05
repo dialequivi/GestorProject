@@ -34,9 +34,9 @@ $sqlAct = "INSERT INTO actividad VALUES ('$codAP','$nameAP','$dateIniAP','$datef
 $result4 = mysql_query($sqlAct);
 
 if(!$result || !$result2 || !$result3 || !$result4 ){
-	echo "Error en la sentencia SQL: ".mysql_error();
+	echo "No se pudo registrar el proyecto: ".mysql_error();
 }else{
-	echo "Proyecto creado! codAct: ".$codAP." metaID: ".$codMP." estado Acti: ".$estadoAP;
+	echo "Se creo el proyecto: ".$nameP;
 	//echo "<br><a href='agregarObjetivo.html'> Agregar objetivo </a> ";
 }
 @mysql_close($conexion);
