@@ -47,7 +47,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Proyectos <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#" id="crearProy" name="ms">Crear proyecto</a></li>
-                  <li><a href="#" id="muestre">Modificar proyecto</a></li>
+                  <li><a href="#" id="muestre" name="muestreMeta">Modificar proyecto</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Administrador</li>
                   <li><a href="#" id="esconda">Eliminar proyecto</a></li>
@@ -89,7 +89,7 @@
 
       <div class="jumbotron" id="infoCrearProy" style="display:none;">
         <table border=0 align=center>
-          <tr>
+          <tr id="filaObje">
             <td><p id="codProy" align="center"> </p></td>
             <td><p id="nameProy" align="center"> </p></td>
           </tr>
@@ -186,7 +186,7 @@
       <table border=0 align=CENTER >
         <TR>
           <TD>Código: </TD>
-          <TD> <p id="codigoObj" id="codigoObj"> </p> </TD>
+          <TD> <p id="codigoObj" name="codigoObj"> </p> </TD>
         </TR>
         <tr>
           <TD>Nombre: </TD>

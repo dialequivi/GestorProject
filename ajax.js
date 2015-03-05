@@ -15,6 +15,20 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	
 	$('[name=btnAddObj]').click(agregarObjetivo);
 
+	$('[name=btnAddMeta]').click(agregarMeta);
+
+	//$('[name=muestreMeta]').click(agregarMeta);
+
+	$('[name=btnAddActi]').click(agregarActividad);
+
+	
+
+	$primerObjetivo = false;
+
+	$primerMeta = false;
+
+	$primerActividad = false;
+
 
 
 	//datosRegistroProy1 = [];
@@ -26,13 +40,13 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 */
 	function agregarObjetivo(){
 		//alert("Agregar Objetivo");
-
+		$primerObjetivo = true;
 		
 		$.ajax({
             type: "POST",
             url: 'php/ultimoCodigoObj.php',
             data: {
-                datosFormulario: $.cookie('codAP'),
+                datosFormulario: $.cookie('codP'),
                 //"datosFormulario": JSON.stringify(datosRegistroProy1)
             },
             dataType: "html",
@@ -42,9 +56,14 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
             //},
             success: function(RespHTML) {
                 //$('#Mensaje').html(RespHTML);
-                alert(RespHTML);
+                //alert(RespHTML);
+
+                $.cookie('codOP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
+
                 $('#codigoObj').html( RespHTML ); 
 				$('#formNewObj').show("fast");
+
+				$('#btnAddObj').hide("fast");
 
 				$('#filaMeta').hide("fast");
 				$('#filaActi').hide("fast");
@@ -59,6 +78,110 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
                 alert('Lo sentimos, se ha producido un error.');
             }
         });
+	}
+
+	/*Agrega una nueva meta acorde al objetivo que se seleccione*/
+	function agregarMeta(){
+		////alert("Vamos a consultar los codigos")
+		$primerMeta = true;
+		$.ajax({
+            type: "POST",
+            url: 'php/codigosObjetivos.php',
+            data: {
+                datosFormulario: $.cookie('codP'),
+                //"datosFormulario": JSON.stringify(datosRegistroProy1)
+            },
+            dataType: "html", /////OJO ESTABA EN json************************************************************
+            //timeout: 1000,
+            //beforeSend: function() {
+              //  alert('En breve se enviará la solicitud.');
+            //},
+            success: function(RespHTML) {
+                //$('#Mensaje').html(RespHTML);
+                //alert(RespHTML[0]);
+                //alert(RespHTML[1]);
+                console.log(RespHTML);
+                
+                //alert(RespHTML[1]);
+
+                //datosRegistroProy1 = RespHTML;//recibo el array
+
+                //alert(datosRegistroProy1[2]);
+
+                $.cookie('codMP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
+                $('#codigoMeta').html( RespHTML); 
+                //( $.cookie('codMP') );
+                //$('#codMetaP').html( RespHTML );
+                //$('#nameMetaP').html( "" );
+				$('#formNewMeta').show("fast");
+
+				$('#btnAddMeta').hide("fast");
+
+				//$('#filaObje').hide("fast");
+				$('#filaActi').hide("fast");
+				
+				$('#btnAddObj').hide("fast");
+				$('#btnAddActi').hide("fast");
+
+
+               
+            },
+            error: function() {
+                alert('Lo sentimos, se ha producido un error.');
+            }
+        });
+	}
+
+	/*Agrega una nueva actividad acorde a la meta que se seleccione*/
+	function agregarActividad(){
+		$primerActividad =  true;
+		$.ajax({
+            type: "POST",
+            url: 'php/registrarActividad.php',
+            data: {
+                datosFormulario: $.cookie('codP'),
+                //"datosFormulario": JSON.stringify(datosRegistroProy1)
+            },
+            dataType: "html", /////OJO ESTABA EN json************************************************************
+            //timeout: 1000,
+            //beforeSend: function() {
+              //  alert('En breve se enviará la solicitud.');
+            //},
+            success: function(RespHTML) {
+                //$('#Mensaje').html(RespHTML);
+                //alert(RespHTML[0]);
+                //alert(RespHTML[1]);
+                console.log(RespHTML);
+                
+                //alert(RespHTML[1]);
+
+                //datosRegistroProy1 = RespHTML;//recibo el array
+
+                //alert(datosRegistroProy1[2]);
+
+                $.cookie('codMP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
+                $('#codigoMeta').html( RespHTML); 
+                //( $.cookie('codMP') );
+                //$('#codMetaP').html( RespHTML );
+                //$('#nameMetaP').html( "" );
+				$('#formNewMeta').show("fast");
+
+				$('#btnAddMeta').hide("fast");
+
+				//$('#filaObje').hide("fast");
+				$('#filaActi').hide("fast");
+				
+				$('#btnAddObj').hide("fast");
+				$('#btnAddActi').hide("fast");
+
+
+               
+            },
+            error: function() {
+                alert('Lo sentimos, se ha producido un error.');
+            }
+        });
+
 	}
 
 
@@ -154,42 +277,54 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
    }
 
 
-	function primerObjetivo(){
+   function primerObjetivo(){
 		//PERIMERO SE DEBEN VERIFICAR LOS CAMPOS
-
-		//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
-		$.cookie('codOP', $.cookie('codP')+".1"  );
-		$.cookie('nameOP', $('[name=nombreObj]').val());
-		$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
-		$.cookie('datefinOP', $('[name=fechafinObj]').val());
-		$.cookie('montoOP', $('[name=montoObj]').val());
-		$.cookie('estadoOP', $('[name=estadoObj]').val());
-		$.cookie('descripOP', $('[name=descripcionObj]').val());
-		/*datosRegistroProy1[7] = datosRegistroProy1[0] +".1";
-		datosRegistroProy1[8] = $('[name=nombreObj]').val();
-		datosRegistroProy1[9] = $('[name=fechaIniObj]').val();
-		datosRegistroProy1[10] = $('[name=fechafinObj]').val();
-		datosRegistroProy1[11] = $('[name=montoObj]').val();
-		datosRegistroProy1[12] = $('[name=estadoObj]').val();
-		datosRegistroProy1[13] = $('[name=descripcionObj]').val();*/
-		//alert("Listo");
-		//alert("CODIGO: "+datosRegistroProy1[7]+" y FECHA-FIN: "+datosRegistroProy1[10]+" ESTADO: "+datosRegistroProy1[12]);
+		if($primerObjetivo == false){
+			//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
+			$.cookie('codOP', $.cookie('codP')+".1"  );
+		}
+    	
+    	//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
+    	$.cookie('nameOP', $('[name=nombreObj]').val());
+    	$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
+    	$.cookie('datefinOP', $('[name=fechafinObj]').val());
+    	$.cookie('montoOP', $('[name=montoObj]').val());
+    	$.cookie('estadoOP', $('[name=estadoObj]').val());
+    	$.cookie('descripOP', $('[name=descripcionObj]').val());
+			/*datosRegistroProy1[7] = datosRegistroProy1[0] +".1";
+			datosRegistroProy1[8] = $('[name=nombreObj]').val();
+			datosRegistroProy1[9] = $('[name=fechaIniObj]').val();
+			datosRegistroProy1[10] = $('[name=fechafinObj]').val();
+			datosRegistroProy1[11] = $('[name=montoObj]').val();
+			datosRegistroProy1[12] = $('[name=estadoObj]').val();
+			datosRegistroProy1[13] = $('[name=descripcionObj]').val();*/
+			//alert("Listo");
+			//alert("CODIGO: "+datosRegistroProy1[7]+" y FECHA-FIN: "+datosRegistroProy1[10]+" ESTADO: "+datosRegistroProy1[12]);
 
 		$('#codObjP').html( $.cookie('codOP') );//SE AGREGA AL div el codigo del objetivo
+		
 		$('#nameObjP').html( $.cookie('nameOP') );
+
+		//alert( $("#codigoObj").text() );
+		console.log( $("#codigoObj").text() );
 
 		$('#formNewObj').hide("fast");//esconde el formulario de objetivo
         $('#formNewMeta').show("fast");//muestra el formulario de meta
-
         $('#codigoMeta').html( $.cookie('codOP') +".1"  );//codigo meta + .1 de nueva meta
 
-	}
+	    }
 
 	function primerMeta(){
 		//PERIMERO SE DEBEN VERIFICAR LOS CAMPOS
 
+		if($primerMeta == false){
+			//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
+			$.cookie('codMP', $.cookie('codOP') +".1" );
+			console.log("primer meta");
+		}
+
 		//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVA META
-		$.cookie('codMP', $.cookie('codOP') +".1" )
+		
 		$.cookie('nameMP', $('[name=nombreMeta]').val() );
 		$.cookie('dateIniMP', $('[name=fechaIniMeta]').val());
 		$.cookie('datefinMP', $('[name=fechafinMeta]').val());
@@ -210,9 +345,19 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 		$('#codMetaP').html( $.cookie('codMP') );
 		$('#nameMetaP').html( $.cookie('nameMP'));
+		if($primerObjetivo == true && $primerMeta == false){
+			$('#filaMeta').show("fast");
+
+		}else if($primerMeta == true){
+			$('#filaActi').show("fast");
+		}
 
 		$('#formNewMeta').hide("fast");//esconde el formulario de objetivo
+
+		
+
         $('#formNewActi').show("fast");//muestra el formulario de meta
+        //$('#btnRegistroNuevoActi').text('Terminar');//Cambio del texto del boton
 
         $('#codigoActi').html( $.cookie('codMP') +".1"  );//codigo meta + .1 de nueva actividad
 	}
@@ -237,33 +382,102 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 		datosRegistroProy1[25] = $('[name=montoActi]').val();
 		datosRegistroProy1[26] = $('[name=estadoActi]').val();
 		datosRegistroProy1[27] = $('[name=descripcionActi]').val();*/
-		$.ajax({
-            type: "POST",
-            url: 'php/registrarProyecto.php',
-            data: {
-                datosFormulario: $.cookie('codAP'),
-                //"datosFormulario": JSON.stringify(datosRegistroProy1)
-            },
-            dataType: "html",
-            //timeout: 1000,
-            //beforeSend: function() {
-              //  alert('En breve se enviará la solicitud.');
-            //},
-            success: function(RespHTML) {
-                //$('#Mensaje').html(RespHTML);
-                alert(RespHTML);
-                $('#codActP').html( $.cookie('codAP') );
-				$('#nameActP').html( $.cookie('nameAP'));
 
-				$('#formNewActi').hide("fast");//esconde el formulario de objetivo
-				$('#btnAddObj').show("fast");
-				$('#btnAddMeta').show("fast");
-				$('#btnAddActi').show("fast");
-            },
-            error: function() {
-                alert('Lo sentimos, se ha producido un error.');
-            }
-        });
+		if($primerObjetivo == false && $primerMeta == false){
+			$.ajax({
+	            type: "POST",
+	            url: 'php/registrarProyecto.php',
+	            data: {
+	                datosFormulario: $.cookie('codAP'),
+	                //"datosFormulario": JSON.stringify(datosRegistroProy1)
+	            },
+	            dataType: "html",
+	            //timeout: 1000,
+	            //beforeSend: function() {
+	              //  alert('En breve se enviará la solicitud.');
+	            //},
+	            success: function(RespHTML) {
+	                //$('#Mensaje').html(RespHTML);
+	                alert(RespHTML);
+	                $('#codActP').html( $.cookie('codAP') );
+					$('#nameActP').html( $.cookie('nameAP'));
+
+					$('#formNewActi').hide("fast");//esconde el formulario de objetivo
+					$('#btnAddObj').show("fast");
+					$('#btnAddMeta').show("fast");
+					$('#btnAddActi').show("fast");
+	            },
+	            error: function() {
+	                alert('Lo sentimos, se ha producido un error.');
+	            }
+	        });
+		}
+		else if($primerObjetivo == true && $primerMeta == false){
+			$primerObjetivo == false;
+			$.ajax({
+	            type: "POST",
+	            url: 'php/registrarObjetivo.php',
+	            data: {
+	                datosFormulario: $.cookie('codAP'),
+	                //"datosFormulario": JSON.stringify(datosRegistroProy1)
+	            },
+	            dataType: "html",
+	            //timeout: 1000,
+	            //beforeSend: function() {
+	              //  alert('En breve se enviará la solicitud.');
+	            //},
+	            success: function(RespHTML) {
+	                //$('#Mensaje').html(RespHTML);
+	                alert(RespHTML);
+	                $('#codActP').html( $.cookie('codAP') );
+					$('#nameActP').html( $.cookie('nameAP'));
+
+					$('#formNewActi').hide("fast");//esconde el formulario de objetivo
+					$('#btnAddObj').show("fast");
+
+					//$('#filaMeta').show("fast");
+					$('#filaActi').show("fast");
+					$('#btnAddMeta').show("fast");
+					$('#btnAddActi').show("fast");
+	            },
+	            error: function() {
+	                alert('Lo sentimos, se ha producido un error.');
+	            }
+	        });
+		}
+		else if($primerMeta == true){
+			$primerMeta = false;
+			$.ajax({
+	            type: "POST",
+	            url: 'php/registrarMeta.php',
+	            data: {
+	                datosFormulario: $.cookie('codAP'),
+	                //"datosFormulario": JSON.stringify(datosRegistroProy1)
+	            },
+	            dataType: "html",
+	            //timeout: 1000,
+	            //beforeSend: function() {
+	              //  alert('En breve se enviará la solicitud.');
+	            //},
+	            success: function(RespHTML) {
+	                //$('#Mensaje').html(RespHTML);
+	                alert(RespHTML);
+	                $('#codActP').html( $.cookie('codAP') );
+					$('#nameActP').html( $.cookie('nameAP'));
+
+					$('#formNewActi').hide("fast");//esconde el formulario de objetivo
+					$('#btnAddObj').show("fast");
+
+					//$('#filaMeta').show("fast");
+					//$('#filaActi').show("fast");
+					$('#btnAddMeta').show("fast");
+					$('#btnAddActi').show("fast");
+	            },
+	            error: function() {
+	                alert('Lo sentimos, se ha producido un error.');
+	            }
+	        });
+		}
 
 	}
 
