@@ -23,7 +23,7 @@ else if($cont == 1){
 	//echo "Hola ",$row['usu_nombre_completo'];
 	//variables de sesión
 	$_SESSION['user'] = $row['usu_nombre_completo'];
-	$_SESSION['passw'] = $row['usu_cedula'];
+	$_SESSION['cedu'] = $row['usu_cedula'];
 	//echo $_SESSION["nombre"];
 	header("Location:../home.php");
 	
