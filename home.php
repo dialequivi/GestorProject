@@ -15,10 +15,6 @@
   <link href="bootstrap-3.3.2-dist/css/navbar.css" rel="stylesheet">
 
   <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
-
-
-
-
 </head>
 
 <body>
@@ -46,8 +42,8 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Proyectos <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#" id="crearProy" name="ms">Crear proyecto</a></li>
-                  <li><a href="#" id="muestre" name="muestreMeta">Modificar proyecto</a></li>
+                  <li><a href="#" id="menuCrearProy" name="ms">Crear proyecto</a></li>
+                  <li><a href="#" id="menuModificarProy" name="muestreMeta">Modificar proyecto</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Administrador</li>
                   <li><a href="#" id="esconda">Eliminar proyecto</a></li>
@@ -88,6 +84,152 @@
 
 
       <div class="jumbotron" id="infoCrearProy" style="display:none;">
+        <div class="container">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+                    <p style="display:inline;">Proyecto:</p>
+                    <p style="display:inline;" id="nameProy2"></p>
+                  </a></h4>
+                </div>
+
+                <div id="collapse1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <a href="javascript:void(0);" onclick="SINO('tabla1')">Información de Proyecto</a>
+                    <div id="tabla1" style="display: none">
+                      <table class="table table-condensed">
+                        <TR>
+                            <TH>Identificador</TH>
+                            <TH>Nombre</TH>
+                            <TH>Fecha de inicio</TH>
+                            <TH>Fecha de finalización</TH>
+                            <TH>Monto</TH>
+                            <TH>Descripción</TH>
+                            <TH>Estado</TH>
+                        </TR>
+                        <TR>
+                            <TD class="default"> <p id="codProy1"></p> </TD>
+                            <TD class="default"> <p id="nameProy1"> </TD>
+                            <TD class="default"> <p id="dateIniProy1"></p> </TD>
+                            <TD class="default"> <p id="dateFinProy1"></p> </TD>
+                            <TD class="default"> <p id="montoProy1"></p> </TD>
+                            <TD class="default"> <p id="descripcionProy1"></p> </TD>
+                            <TD class="default"> <p id="estadoProy1"></p> </TD>
+                        </TR>
+                      </table>
+                    </div>
+                      <!-- Objetivos -->
+                            <div class="panel-group" id="accordion2" style="display:none;">
+                                <div class="panel panel-success">
+                                  <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInner2">
+                                      <p style="display:inline;">Objetivo:</p>
+                                      <p style="display:inline;" id="nameObj2"></p>
+                                    </a></h4>
+                                  </div>
+                                  <div id="collapseInner2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                      <table class="table table-condensed">
+                                        <TR>
+                                            <TH>Identificador</TH>
+                                            <TH>Nombre</TH>
+                                            <TH>Fecha de inicio</TH>
+                                            <TH>Fecha de finalización</TH>
+                                            <TH>Monto</TH>
+                                            <TH>Descripción</TH>
+                                            <TH>Estado</TH>
+                                        </TR>
+                                        <TR>
+                                          <TD class="default"> <p id="codObj1"></p> </TD>
+                                          <TD class="default"> <p id="nameObj1"> </p> </TD>
+                                          <TD class="default"> <p id="dateIniObj1"></p> </TD>
+                                          <TD class="default"> <p id="dateFinObj1"></p> </TD>
+                                          <TD class="default"> <p id="montoObj1"></p> </TD>
+                                          <TD class="default"> <p id="descripcionObj1"></p> </TD>
+                                          <TD class="default"> <p id="estadoObj1"></p> </TD>
+                                        </TR>
+                                      </table>
+                                      <!-- Metas -->
+                                      <div class="panel-group" id="accordion3" style="display:none;">
+                                          <div class="panel panel-danger">
+                                            <div class="panel-heading">
+                                              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseInner3">
+                                                <p style="display:inline;">Meta:</p>
+                                                <p style="display:inline;" id="nameMet2"></p>
+                                              </a></h4>
+                                            </div>
+                                            <div id="collapseInner3" class="panel-collapse collapse">
+                                              <div class="panel-body">
+                                                    <table class="table table-condensed">
+                                                      <TR>
+                                                          <TH>Identificador</TH>
+                                                          <TH>Nombre</TH>
+                                                          <TH>Fecha de inicio</TH>
+                                                          <TH>Fecha de finalización</TH>
+                                                          <TH>Monto</TH>
+                                                          <TH>Descripción</TH>
+                                                          <TH>Estado</TH>
+                                                      </TR>
+                                                      <TR>
+                                                          <TD class="default"> <p id="codMet1"></p> </TD>
+                                                          <TD class="default"> <p id="nameMet1"> </p> </TD>
+                                                          <TD class="default"> <p id="dateIniMet1"></p> </TD>
+                                                          <TD class="default"> <p id="dateFinMet1"></p> </TD>
+                                                          <TD class="default"> <p id="montoMet1"></p> </TD>
+                                                          <TD class="default"> <p id="descripcionMet1"></p> </TD>
+                                                          <TD class="default"> <p id="estadoMet1"></p> </TD>
+                                                      </TR>
+                                                    </table>
+                                                  <!-- ACTIVIDADES-->
+                                                    <div class="panel-group" id="accordion4" style="display:none;">
+                                                      <div class="panel panel-info">
+                                                        <div class="panel-heading">
+                                                          <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion4" href="#collapseInner4">
+                                                            <p style="display:inline;">Actividad:</p>
+                                                            <p style="display:inline;" id="nameAct2"></p>
+                                                          </a></h4>
+                                                        </div>
+                                                        <div id="collapseInner4" class="panel-collapse collapse">
+                                                          <div class="panel-body">
+                                                                <table class="table table-condensed">
+                                                                  <TR>
+                                                                      <TH>Identificador</TH>
+                                                                      <TH>Nombre</TH>
+                                                                      <TH>Fecha de inicio</TH>
+                                                                      <TH>Fecha de finalización</TH>
+                                                                      <TH>Monto</TH>
+                                                                      <TH>Descripción</TH>
+                                                                      <TH>Estado</TH>
+                                                                  </TR>
+                                                                  <TR>
+                                                                      <TD class="default"> <p id="codAct1"></p> </TD>
+                                                                      <TD class="default"> <p id="nameAct1"> </p> </TD>
+                                                                      <TD class="default"> <p id="dateIniAct1"></p> </TD>
+                                                                      <TD class="default"> <p id="dateFinAct1"></p> </TD>
+                                                                      <TD class="default"> <p id="montoAct1"></p> </TD>
+                                                                      <TD class="default"> <p id="descripcionAct1"></p> </TD>
+                                                                      <TD class="default"> <p id="estadoAct1"></p> </TD>
+                                                                  </TR>
+                                                                </table>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div> 
+                                                  <!-- ACTIVIDADES-->
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div> 
+                                    <!-- METAS-->
+                                    </div>
+                                  </div>
+                                </div>
+                            </div> 
+                          <!-- Objetivos -->
+                  </div>
+                </div>
+              </div>
+            </div>
         <table border=0 align=center>
           <tr id="filaObje">
             <td><p id="codProy" align="center"> </p></td>
@@ -327,10 +469,6 @@
         </table>
       </form>
     </div>
-
-
-
-
   </div> <!-- /container -->
 
 
@@ -355,18 +493,36 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-      $("#crearProy").click(function(){//id crearProy - opcion del menu crear proyecto
+      $("#menuCrearProy").click(function(){//id crearProy - opcion del menu crear proyecto
         $.cookie('cedulaUser', <?php echo $_SESSION['cedu']; ?>);
 
         $('#bienvenida').hide("fast");//
+        $('#modificarProyecto').hide("fast");
         $('#formNewProy').show("fast");//id formNewProy - div que contiene el formulario de crear proyecto
         //alert("La cedula es: "+$.cookie('cedulaUser'));
       });
+
+      $('#menuModificarProy').click(function(){
+          $('#bienvenida').hide("fast");
+          $('#formNewProy').hide("fast");
+          $('#modificarProyecto').show("fast");
+      });
+
       $("#esconda").click(function(){
         $('#formNewProy').hide("fast");
         //$('#bienvenida').show("fast");
       });
-    });
+    }); 
+  </script>
+  <script>
+    function SINO(cual) {
+       var elElemento=document.getElementById(cual);
+       if(elElemento.style.display == 'block') {
+          elElemento.style.display = 'none';
+       } else {
+          elElemento.style.display = 'block';
+       }
+    }
   </script>
 
 
@@ -482,7 +638,5 @@
 
     });
   </script>-->
-
-
 </body>
 </html>

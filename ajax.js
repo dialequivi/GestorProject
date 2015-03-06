@@ -17,7 +17,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 	$('[name=btnAddMeta]').click(agregarMeta);
 
-	//$('[name=muestreMeta]').click(agregarMeta);
+	//$('[name=muestreMeta]').click(agregarActividad);
 
 	$('[name=btnAddActi]').click(agregarActividad);
 
@@ -137,7 +137,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 		$primerActividad =  true;
 		$.ajax({
             type: "POST",
-            url: 'php/registrarActividad.php',
+            url: 'php/ultimoCodigoActi.php',
             data: {
                 datosFormulario: $.cookie('codP'),
                 //"datosFormulario": JSON.stringify(datosRegistroProy1)
@@ -151,6 +151,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
                 //$('#Mensaje').html(RespHTML);
                 //alert(RespHTML[0]);
                 //alert(RespHTML[1]);
+                console.log("Sigte código: ");
                 console.log(RespHTML);
                 
                 //alert(RespHTML[1]);
@@ -159,20 +160,20 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
                 //alert(datosRegistroProy1[2]);
 
-                $.cookie('codMP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
-                $('#codigoMeta').html( RespHTML); 
+                $.cookie('codAP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
+                $('#codigoActi').html( RespHTML); 
                 //( $.cookie('codMP') );
                 //$('#codMetaP').html( RespHTML );
                 //$('#nameMetaP').html( "" );
-				$('#formNewMeta').show("fast");
+				$('#formNewActi').show("fast");
 
-				$('#btnAddMeta').hide("fast");
+				$('#btnAddActi').hide("fast");
 
 				//$('#filaObje').hide("fast");
-				$('#filaActi').hide("fast");
+				//$('#filaActi').hide("fast");
 				
 				$('#btnAddObj').hide("fast");
-				$('#btnAddActi').hide("fast");
+				$('#btnAddMeta').hide("fast");
 
 
                
@@ -273,6 +274,16 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 		$("#formNewProy").hide("fast");
 		$('#formNewObj').show("fast");
 		$('#codigoObj').html( $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
+		//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
+          $('#codProy1').html( $.cookie('codP') );
+          $('#nameProy1').html( $.cookie('nameP') );
+          $('#nameProy2').html( $.cookie('nameP') );
+          $('#dateIniProy1').html( $.cookie('dateIniP') );
+          $('#dateFinProy1').html( $.cookie('datefinP') );
+          $('#montoProy1').html( $.cookie('montoP') );
+          $('#estadoProy1').html( $.cookie('estadoP') );
+          $('#descripcionProy1').html( $.cookie('descripcionP') );
+      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
 
    }
 
@@ -311,6 +322,18 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 		$('#formNewObj').hide("fast");//esconde el formulario de objetivo
         $('#formNewMeta').show("fast");//muestra el formulario de meta
         $('#codigoMeta').html( $.cookie('codOP') +".1"  );//codigo meta + .1 de nueva meta
+        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
+          
+          $('#accordion2').show("fast");
+          $('#codObj1').html( $.cookie('codOP') );
+          $('#nameObj1').html( $.cookie('nameOP') );
+          $('#nameObj2').html( $.cookie('nameOP') );
+          $('#dateIniObj1').html( $.cookie('dateIniOP') );
+          $('#dateFinObj1').html( $.cookie('datefinOP') );
+          $('#montoObj1').html( $.cookie('montoOP') );
+          $('#estadoObj1').html( $.cookie('estadoOP') );
+          $('#descripcionObj1').html( $.cookie('descripcionOP') );
+      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
 
 	    }
 
@@ -360,6 +383,18 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
         //$('#btnRegistroNuevoActi').text('Terminar');//Cambio del texto del boton
 
         $('#codigoActi').html( $.cookie('codMP') +".1"  );//codigo meta + .1 de nueva actividad
+
+        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
+          $('#accordion3').show("fast");
+          $('#codMet1').html( $.cookie('codMP') );
+          $('#nameMet1').html( $.cookie('nameMP') );
+          $('#nameMet2').html( $.cookie('nameMP') );
+          $('#dateIniMet1').html( $.cookie('dateIniMP') );
+          $('#dateFinMet1').html( $.cookie('datefinMP') );
+          $('#montoMet1').html( $.cookie('montoMP') );
+          $('#estadoMet1').html( $.cookie('estadoMP') );
+          $('#descripcionMet1').html( $.cookie('descripcionMP') );
+      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
 	}
 
 	function primerActi(){
@@ -367,7 +402,12 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 		//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVA ACTIVIDAD
 
-		$.cookie('codAP', $.cookie('codMP') +".1" );
+		if($primerActividad == false){
+			$.cookie('codAP', $.cookie('codMP') +".1" );
+			
+		}
+
+		
 		$.cookie('nameAP', $('[name=nombreActi]').val());
 		$.cookie('dateIniAP', $('[name=fechaIniActi]').val());
 		$.cookie('datefinAP', $('[name=fechafinActi]').val());
@@ -382,8 +422,19 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 		datosRegistroProy1[25] = $('[name=montoActi]').val();
 		datosRegistroProy1[26] = $('[name=estadoActi]').val();
 		datosRegistroProy1[27] = $('[name=descripcionActi]').val();*/
+		//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de ACTIVIDAD AL ACORDEON HOME
+          $('#accordion4').show("fast");
+          $('#codAct1').html( $.cookie('codAP') );
+          $('#nameAct1').html( $.cookie('nameAP') );
+          $('#nameAct2').html( $.cookie('nameAP') );
+          $('#dateIniAct1').html( $.cookie('dateIniAP') );
+          $('#dateFinAct1').html( $.cookie('datefinAP') );
+          $('#montoAct1').html( $.cookie('montoAP') );
+          $('#estadoAct1').html( $.cookie('estadoAP') );
+          $('#descripcionAct1').html( $.cookie('descriAP') );
+      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
 
-		if($primerObjetivo == false && $primerMeta == false){
+		if($primerObjetivo == false && $primerMeta == false && $primerActividad == false){ // Este es el caso para cuando se registra el proyecto por primera vez
 			$.ajax({
 	            type: "POST",
 	            url: 'php/registrarProyecto.php',
@@ -412,7 +463,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	            }
 	        });
 		}
-		else if($primerObjetivo == true && $primerMeta == false){
+		else if($primerObjetivo == true && $primerMeta == false && $primerActividad == false){//Para registrar un nuevo objetivo
 			$primerObjetivo == false;
 			$.ajax({
 	            type: "POST",
@@ -445,7 +496,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	            }
 	        });
 		}
-		else if($primerMeta == true){
+		else if($primerMeta == true && $primerActividad == false){ //Para registrar una nueva meta
 			$primerMeta = false;
 			$.ajax({
 	            type: "POST",
@@ -478,8 +529,41 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	            }
 	        });
 		}
+		else if($primerActividad == true){
+			$primerActividad = false;
+			$.ajax({
+	            type: "POST",
+	            url: 'php/registrarActividad.php',
+	            data: {
+	                datosFormulario: $.cookie('codP'),
+	                //"datosFormulario": JSON.stringify(datosRegistroProy1)
+	            },
+	            dataType: "html",
+	            //timeout: 1000,
+	            //beforeSend: function() {
+	              //  alert('En breve se enviará la solicitud.');
+	            //},
+	            success: function(RespHTML) {
+	                //$('#Mensaje').html(RespHTML);
+	                alert(RespHTML);
+	                $('#codActP').html( $.cookie('codAP') );
+					$('#nameActP').html( $.cookie('nameAP'));
+
+					$('#formNewActi').hide("fast");//esconde el formulario de objetivo
+					$('#btnAddObj').show("fast");
+
+					//$('#filaMeta').show("fast");
+					//$('#filaActi').show("fast");
+					$('#btnAddMeta').show("fast");
+					$('#btnAddActi').show("fast");
+	            },
+	            error: function() {
+	                alert('Lo sentimos, se ha producido un error.');
+	            }
+	        });
+
+
+		}
 
 	}
-
-
 });
