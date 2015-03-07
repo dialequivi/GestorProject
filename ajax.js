@@ -17,7 +17,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 	$('[name=btnAddMeta]').click(agregarMeta);
 
-	$('[name=muestreMeta]').click(agregarActividad);
+	//$('[name=muestreMeta]').click(agregarActividad);
 
 	$('[name=btnAddActi]').click(agregarActividad);
 
