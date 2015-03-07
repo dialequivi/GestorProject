@@ -435,7 +435,6 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
           $('#descripcionAct1').html( $.cookie('descriAP') );
       	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
 
-
 		if($primerObjetivo == false && $primerMeta == false && $primerActividad == false){ // Este es el caso para cuando se registra el proyecto por primera vez
 			$.ajax({
 	            type: "POST",
@@ -549,24 +548,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	                //$('#Mensaje').html(RespHTML);
 	                alert(RespHTML);
 	                $('#codActP').html( $.cookie('codAP') );
-        					$('#nameActP').html( $.cookie('nameAP'));
-
-
-        					$('#formNewActi').hide("fast");//esconde el formulario de objetivo
-        					$('#btnAddObj').show("fast");
-
-        					//$('#filaMeta').show("fast");
-        					//$('#filaActi').show("fast");
-        					$('#btnAddMeta').show("fast");
-        					$('#btnAddActi').show("fast");
-	            },
-	            error: function() {
-	                alert('Lo sentimos, se ha producido un error.');
-	            }
-	        });
-
-
-		}
+					$('#nameActP').html( $.cookie('nameAP'));
 
 
 					$('#formNewActi').hide("fast");//esconde el formulario de objetivo

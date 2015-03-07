@@ -83,7 +83,7 @@
 
 
 
-      <div class="jumbotron" id="infoCrearProy" style="display:none;">
+      <div class="panel-group" id="infoCrearProy" style="display:none;">
         <div class="container">
               <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -492,8 +492,7 @@
         die("no se pudo conectar a la base de datos");
       }
 
-      $sql= "SELECT pro_id, pro_nombre, pro_fecha_inicio, pro_fecha_fin, pro_monto, pro_descripcion, usu_nombre_completo, est_nombre 
-        FROM proyecto, usuario, estado WHERE usu_cedula = usuario_usu_cedula AND est_id = estado_est_id  GROUP BY pro_id";
+      $sql= "SELECT pro_id, pro_nombre, pro_fecha_inicio, pro_fecha_fin, pro_monto, pro_descripcion, usu_nombre_completo, est_nombre FROM proyecto, usuario, estado WHERE usu_cedula = usuario_usu_cedula AND est_id = estado_est_id  GROUP BY pro_id";
       $result= mysql_query($sql);
 
       if($result==FALSE)

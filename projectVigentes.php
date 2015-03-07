@@ -58,7 +58,6 @@
                 </ul>
               </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
-
           </nav>
           <?php
 
@@ -276,21 +275,14 @@
                   </div> 
                   <!-- Objetivos -->
 
-
                 </div>
-                ";
-                $id=$id+1;
-                }
-                ?>
               </div>
-
             </div>
             ";
             $id=$id+1;
           }
           ?>
         </div>
-
         
         <script src="bootstrap-3.3.2-dist/js/jquery.js"></script>
         <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
