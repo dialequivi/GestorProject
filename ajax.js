@@ -29,6 +29,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 	$primerActividad = false;
 
+	$idCodObjAnterior = "";
 
 
 	//datosRegistroProy1 = [];
