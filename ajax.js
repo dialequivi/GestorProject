@@ -18,8 +18,10 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	$('[name=btnAddMeta]').click(agregarMeta);
 
 	//$('[name=muestreMeta]').click(agregarActividad);
-
 	$('[name=btnAddActi]').click(agregarActividad);
+
+	//$('[name=btnNuevoObjid]').click(ejemplo);
+
 
 	
 
@@ -68,12 +70,9 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 				$('#filaMeta').hide("fast");
 				$('#filaActi').hide("fast");
-				
+
 				$('#btnAddMeta').hide("fast");
-				$('#btnAddActi').hide("fast");
-
-
-               
+				$('#btnAddActi').hide("fast");    
             },
             error: function() {
                 alert('Lo sentimos, se ha producido un error.');
@@ -235,8 +234,6 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
             }
 		});
 	}
-
-
 	function limpiarCampoForm(formulario){
 		$(formulario).find('input').each(function(){
 			switch(this.type){
@@ -246,7 +243,6 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 			}
 		});
 	}
-
 
 	function datosProy1(){
 		//CAPTURANDO LOS DATOS DEL FORMULARIO DEL NUEVO PROYECTO

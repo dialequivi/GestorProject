@@ -6,3 +6,14 @@ body {
 .navbar {
   margin-bottom: 20px;
 }
+#cont{
+   overflow:hidden;
+}
+ 
+#cont1{
+   float: left;
+}
+ 
+#cont2{
+   float:right;
+}
