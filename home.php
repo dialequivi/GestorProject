@@ -516,7 +516,7 @@
                       </a></h4>
                     </div>
                    <div id=\"cont2\">   
-                    <button onClick=\"location.href='procesarDatos.php? identificador=$row[pro_id]'\" id=\"boton$id\" type=\"button\" class=\"btn btn-danger\" name=\"btnNuevoObj\">Agregar Objetivo</button>
+                      <button  id=\"$row[pro_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnNuevoObjPro\">Agregar Objetivo</button>
                    </div>
                  </div>
                
@@ -710,7 +710,7 @@
           ";
           $id=$id+1;
         }
-        echo "<script src=\"ajax.js?miVariable=oscar\" type=\"text/javascript\"></script>";
+       // echo "<script src=\"ajax.js?miVariable=oscar\" type=\"text/javascript\"></script>";
         ?>
         </div>
       </form>
@@ -804,6 +804,8 @@
        }
     }
   </script>
+
+
 
   <!--GUARDAR DATOS DE CREAR NUEVO PROYECTO-->
     <!--<script>

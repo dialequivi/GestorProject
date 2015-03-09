@@ -20,7 +20,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	//$('[name=muestreMeta]').click(agregarActividad);
 	$('[name=btnAddActi]').click(agregarActividad);
 
-	//$('[name=btnNuevoObjid]').click(ejemplo);
+	$('[name=btnNuevoObjPro]').click( lera );
 
 
 	
@@ -37,8 +37,25 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	//datosRegistroProy1 = [];
 
 
+
 	/**Métodos
 	==============================*/
+
+
+
+function lera( ){
+
+	//alert(" CLICK!");
+	$codigoProyecto = this.id;
+	//alert($codigo);
+	console.log($codigoProyecto);
+	$.cookie('codP', $codigoProyecto );
+	agregarObjetivo();
+}
+	
+
+
+
 /*Agrega un nuevo objetivo a un proyecto ya creado
 */
 	function agregarObjetivo(){
