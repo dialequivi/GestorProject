@@ -561,10 +561,20 @@
                     echo "
                     <div class=\"panel panel-success\">
                       <div class=\"panel-heading\">
-                        <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion2\" href=\"#collapseInner$id$id2\">
-                          Objetivo: $row2[obj_nombre]
-                        </a></h4>
+                        <div id=\"cont\">
+                          <div id=\"cont1\">
+                            <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion2\" href=\"#collapseInner$id$id2\">
+                                Objetivo: $row2[obj_id]_$row2[obj_nombre]
+                            </a></h4>
+                          </div>
+
+                      <div id=\"cont2\">   
+                        <button  id2=\"$row2[obj_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnNuevoMetaPro\">Agregar Meta</button>
                       </div>
+                    </div>
+                  </div>
+
+
                       <div id=\"collapseInner$id$id2\" class=\"panel-collapse collapse\">
                         <div class=\"panel-body\">
                           <table class=\"table table-condensed\">

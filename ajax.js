@@ -20,7 +20,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	//$('[name=muestreMeta]').click(agregarActividad);
 	$('[name=btnAddActi]').click(agregarActividad);
 
-	$('[name=btnNuevoObjPro]').click( lera );
+	$('[name=btnNuevoObjPro]').click( addObjectFromModify );
 
 
 	
@@ -42,8 +42,8 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	==============================*/
 
 
-
-function lera( ){
+/*Agrega un objetivo a un proyecto previamente creado, los cuales se consultan desde el menu > modificar proyecto*/
+function addObjectFromModify( ){
 
 	//alert(" CLICK!");
 	$codigoProyecto = this.id;
@@ -505,6 +505,8 @@ function lera( ){
 					$('#filaActi').show("fast");
 					$('#btnAddMeta').show("fast");
 					$('#btnAddActi').show("fast");
+
+					$('#menuModificarProy').click( );
 	            },
 	            error: function() {
 	                alert('Lo sentimos, se ha producido un error.');
