@@ -512,11 +512,13 @@
                  <div id=\"cont\">
                     <div id=\"cont1\">
                       <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion1\" href=\"#collapse$id\">
-                        Proyecto: $row[pro_id]_$row[pro_nombre]
+                        Proyecto: $row[pro_id]  $row[pro_nombre]
                       </a></h4>
                     </div>
                    <div id=\"cont2\">   
                       <button  id=\"$row[pro_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnNuevoObjPro\">Agregar Objetivo</button>
+                      <button  id=\"$row[pro_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyObjPro\">Modificar Objetivo</button>
+                     
                    </div>
                  </div>
                
@@ -549,7 +551,7 @@
                 <!-- Objetivos -->
                 <div class=\"panel-group\" id=\"accordion2\">
                   ";
-                  $sql2="SELECT * FROM objetivo WHERE proyecto_pro_id='$row[pro_id]'";
+                  $sql2="SELECT obj_id, obj_nombre, obj_fecha_inicio, obj_fecha_fin, obj_monto, obj_descripcion, proyecto_pro_id, est_nombre FROM objetivo, estado WHERE proyecto_pro_id='$row[pro_id]' AND est_id=estado_est_id";
                   $result2= mysql_query($sql2);
                   if($result2==FALSE)
                   {
@@ -564,12 +566,14 @@
                         <div id=\"cont\">
                           <div id=\"cont1\">
                             <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion2\" href=\"#collapseInner$id$id2\">
-                                Objetivo: $row2[obj_id]_$row2[obj_nombre]
+                                Objetivo: $row2[obj_id]  $row2[obj_nombre]
                             </a></h4>
                           </div>
 
                       <div id=\"cont2\">   
-                        <button  id2=\"$row2[obj_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnNuevoMetaPro\">Agregar Meta</button>
+                        <button  id=\"$row2[obj_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnNuevoMetaPro\">Agregar Meta</button>
+                        <button  id=\"$row2[obj_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnModifyMetaPro\">Modificar Meta</button>
+                        
                       </div>
                     </div>
                   </div>
@@ -596,13 +600,13 @@
                               <TD class=\"default\"> $row2[obj_monto]</TD>
                               <TD class=\"default\"> $row2[obj_descripcion]</TD>
                               <TD class=\"default\"> $row2[proyecto_pro_id]</TD>
-                              <TD class=\"default\"> $row2[estado_est_id]</TD>
+                              <TD class=\"default\"> $row2[est_nombre]</TD>
                             </TR>
                           </table>
                           <!-- METAS -->
                           <div class=\"panel-group\" id=\"accordion3\">
                             ";
-                            $sql3="SELECT * FROM meta WHERE objetivo_obj_id='$row2[obj_id]'";
+                            $sql3="SELECT me_id, me_nombre, me_fecha_inicio, me_fecha_fin, me_monto, me_descripcion, objetivo_obj_id, est_nombre FROM meta, estado WHERE objetivo_obj_id='$row2[obj_id]' AND estado_est_id=est_id";
                             $result3= mysql_query($sql3);
                             if($result3==FALSE)
                             {
@@ -614,9 +618,19 @@
                               echo "
                               <div class=\"panel panel-danger\">
                                 <div class=\"panel-heading\">
-                                  <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion3\" href=\"#collapseInner$id$id2$id3\">
-                                    Meta: $row3[me_nombre]
-                                  </a></h4>
+                                  <div id=\"cont\">
+                                    <div id=\"cont1\">
+                                      <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion3\" href=\"#collapseInner$id$id2$id3\">
+                                        Meta: $row3[me_id]  $row3[me_nombre]
+                                      </a></h4>
+                                    </div>
+
+                                    <div id=\"cont2\">
+                                      <button  id=\"$row3[me_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnNuevoActividadPro\">Agregar Actividad</button>
+                                      <button  id=\"$row3[me_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnModifyActividadPro\">Modificar Actividad</button>
+                                      
+                                    </div> 
+                                  </div>
                                 </div>
                                 <div id=\"collapseInner$id$id2$id3\" class=\"panel-collapse collapse\">
                                   <div class=\"panel-body\">
@@ -640,13 +654,13 @@
                                         <TD class=\"default\"> $row3[me_monto]</TD>
                                         <TD class=\"default\"> $row3[me_descripcion]</TD>
                                         <TD class=\"default\"> $row3[objetivo_obj_id]</TD>
-                                        <TD class=\"default\"> $row3[estado_est_id]</TD>
+                                        <TD class=\"default\"> $row3[est_nombre]</TD>
                                       </TR>
                                     </table>
                                     <!-- ACTIVIDADES-->
                                     <div class=\"panel-group\" id=\"accordion4\">
                                       ";
-                                      $sql4="SELECT act_id, act_nombre, act_fecha_inicio, act_fecha_fin, act_monto, act_descripcion, meta_me_id, est_nombre FROM actividad, estado WHERE meta_me_id='$row3[me_id]'";
+                                      $sql4="SELECT act_id, act_nombre, act_fecha_inicio, act_fecha_fin, act_monto, act_descripcion, meta_me_id, est_nombre FROM actividad, estado WHERE meta_me_id='$row3[me_id]' AND est_id= estado_est_id";
                                       $result4= mysql_query($sql4);
                                       if($result4==FALSE)
                                       {
@@ -659,7 +673,7 @@
                                         <div class=\"panel panel-info\">
                                           <div class=\"panel-heading\">
                                             <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion4\" href=\"#collapseInner$id$id2$id3$id4\">
-                                              Actividad: $row4[act_nombre]
+                                              Actividad: $row4[act_id]  $row4[act_nombre]
                                             </a></h4>
                                           </div>
                                           <div id=\"collapseInner$id$id2$id3$id4\" class=\"panel-collapse collapse\">
