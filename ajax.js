@@ -20,7 +20,17 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	//$('[name=muestreMeta]').click(agregarActividad);
 	$('[name=btnAddActi]').click(agregarActividad);
 
+
+
 	$('[name=btnNuevoObjPro]').click( addObjectFromModify );
+
+	$('[name=btnNuevoMetaPro]').click( addMetaFromModify );
+
+	$('[name=btnNuevoActividadPro]').click( addActiFromModify );
+
+
+	$('[name=btnModifyObjPro]').click( modifyObject );
+
 
 
 	
@@ -48,11 +58,54 @@ function addObjectFromModify( ){
 	//alert(" CLICK!");
 	$codigoProyecto = this.id;
 	//alert($codigo);
-	console.log($codigoProyecto);
+	console.log("Codigo proyecto: "+$codigoProyecto);
 	$.cookie('codP', $codigoProyecto );
 	agregarObjetivo();
 }
+
+/*Agregra una meta a un objetivo de un proyecto previamente creado, la meta se agrega al código de objetivo que seleccione el usuario*/
+function addMetaFromModify( ){
+	$codigoObjetibo = this.id;
+	console.log("Codigo objetivo: "+$codigoObjetibo);
+	$.cookie('codOP', $codigoObjetibo );
+	agregarMeta();
+}
+
+function addActiFromModify(){
+	$codigoMeta = this.id;
+	console.log("Codigo meta: "+$codigoMeta);
+	$.cookie('codMP', $codigoMeta);
+	agregarActividad();
+}
 	
+/*Permite la modificación de un objetivo*/
+function modifyObject(){
+	$codigoObjetibo = this.id;
+	console.log("Codigo objetivo: "+$codigoObjetibo);
+	
+	//$tableData = $("#"+$codigoObjetibo+"_tabla").children("td").map(function(){
+	//	return $("#"+$codigoObjetibo+"_tabla").text();
+	//}).get();
+	console.log("Datos tabla:");
+
+	/*var $row = $(this).closest("tr"); //Find the row
+	var $text = $row.find(".default").text(); //find the text
+
+	alert($text);
+	console.log($text);*/
+	var $row = $(this).closest("tr"); // Finds the closest row <tr> 
+	var $tds = $row.find(".default"); // Finds all children <td> elements
+
+	$.each($tds, function(){// Visits every single <td> element
+		console.log($(this).text());// Prints out the text within the <td>
+	})
+	//console.log($text);
+	//alert($text);
+	
+
+	
+	//console.log($tableData[0]+" "+$tableData[1]);
+}
 
 
 

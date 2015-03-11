@@ -517,7 +517,7 @@
                     </div>
                    <div id=\"cont2\">   
                       <button  id=\"$row[pro_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnNuevoObjPro\">Agregar Objetivo</button>
-                      <button  id=\"$row[pro_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyObjPro\">Modificar Objetivo</button>
+                      
                      
                    </div>
                  </div>
@@ -572,7 +572,8 @@
 
                       <div id=\"cont2\">   
                         <button  id=\"$row2[obj_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnNuevoMetaPro\">Agregar Meta</button>
-                        <button  id=\"$row2[obj_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnModifyMetaPro\">Modificar Meta</button>
+                        
+                        
                         
                       </div>
                     </div>
@@ -581,7 +582,7 @@
 
                       <div id=\"collapseInner$id$id2\" class=\"panel-collapse collapse\">
                         <div class=\"panel-body\">
-                          <table class=\"table table-condensed\">
+                          <table id=\"$row2[obj_id]_tabla\" class=\"table table-condensed\" >
                             <TR>
                               <TH>Identificador</TH>
                               <TH>Nombre</TH>
@@ -601,6 +602,9 @@
                               <TD class=\"default\"> $row2[obj_descripcion]</TD>
                               <TD class=\"default\"> $row2[proyecto_pro_id]</TD>
                               <TD class=\"default\"> $row2[est_nombre]</TD>
+
+                              <TD><button  type=\"button\" id=\"$row2[obj_id]\"  class=\"btn btn-danger\" name=\"btnModifyObjPro\">Modificar Objetivo</button></TD>
+
                             </TR>
                           </table>
                           <!-- METAS -->
@@ -627,7 +631,8 @@
 
                                     <div id=\"cont2\">
                                       <button  id=\"$row3[me_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnNuevoActividadPro\">Agregar Actividad</button>
-                                      <button  id=\"$row3[me_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnModifyActividadPro\">Modificar Actividad</button>
+                                      <button  id=\"$row3[me_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyMetaPro\">Modificar Meta</button>
+                                      
                                       
                                     </div> 
                                   </div>
@@ -672,10 +677,18 @@
                                         echo "
                                         <div class=\"panel panel-info\">
                                           <div class=\"panel-heading\">
-                                            <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion4\" href=\"#collapseInner$id$id2$id3$id4\">
-                                              Actividad: $row4[act_id]  $row4[act_nombre]
-                                            </a></h4>
+                                            <div id=\"cont\">
+                                              <div id=\"cont1\">
+                                                <h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion4\" href=\"#collapseInner$id$id2$id3$id4\">
+                                                  Actividad: $row4[act_id]  $row4[act_nombre]
+                                                </a></h4>
+                                              </div>
+                                              <div id=\"cont2\">
+                                                <button  id=\"$row4[act_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyActividadPro\">Modificar Actividad</button>
+                                              </div>
+                                            </div>
                                           </div>
+
                                           <div id=\"collapseInner$id$id2$id3$id4\" class=\"panel-collapse collapse\">
                                             <div class=\"panel-body\">
                                               <table class=\"table table-condensed\">
