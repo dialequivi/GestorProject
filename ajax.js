@@ -80,7 +80,10 @@ function addObjectFromModify( ){
 
                 $.cookie('codOP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
 
-                $('#codigoObj').html( RespHTML ); 
+                $('#codigoObj').html( RespHTML );      
+
+                //$('#formNewProy').hide("fast");
+
 				$('#formNewObj').show("fast");
 
 				$('#btnAddObj').hide("fast");
@@ -262,42 +265,52 @@ function addObjectFromModify( ){
 	}
 
 	function datosProy1(){
+		$.cookie('dateIniP', $('[name=fechaIniProy]').val() );
+	    $.cookie('datefinP', $('[name=fechafinProy]').val() );
+
+		if ($.cookie('dateIniP')>$.cookie('datefinP')){
+        	alert("Fecha de Finalización Incorrecta");
+        	$("#formNewProy").show("fast");
+			$('#formNewObj').fast("fast");
+        }
+        else{
 		//CAPTURANDO LOS DATOS DEL FORMULARIO DEL NUEVO PROYECTO
-		$.cookie('codP', $('[name=codigoProy]').val() );
-        $.cookie('nameP', $('[name=nombreProy]').val() );
-        $.cookie('dateIniP', $('[name=fechaIniProy]').val() );
-        $.cookie('datefinP', $('[name=fechafinProy]').val() );
-        $.cookie('montoP', $('[name=montoProy]').val() );
-        $.cookie('estadoP', $('[name=estadoProy]').val() );
-        $.cookie('descripcionP', $('[name=descripcionProy]').val() );
+			$.cookie('codP', $('[name=codigoProy]').val() );
+	        $.cookie('nameP', $('[name=nombreProy]').val() );
+	        $.cookie('dateIniP', $('[name=fechaIniProy]').val() );
+	        $.cookie('datefinP', $('[name=fechafinProy]').val() );
+	        $.cookie('montoP', $('[name=montoProy]').val() );
+	        $.cookie('estadoP', $('[name=estadoProy]').val() );
+	        $.cookie('descripcionP', $('[name=descripcionProy]').val() );
 
-        //datosRegistroProy1[0] = $('[name=codigoProy]').val();
-		/*datosRegistroProy1[0] = $('[name=codigoProy]').val();
-		datosRegistroProy1[1] = $('[name=nombreProy]').val();
-		datosRegistroProy1[2] = $('[name=fechaIniProy]').val();
-		datosRegistroProy1[3] = $('[name=fechafinProy]').val();
-		datosRegistroProy1[4] = $('[name=montoProy]').val();
-		datosRegistroProy1[5] = $('[name=estadoProy]').val();
-		datosRegistroProy1[6] = $('[name=descripcionProy]').val();*/
+	        //datosRegistroProy1[0] = $('[name=codigoProy]').val();
+			/*datosRegistroProy1[0] = $('[name=codigoProy]').val();
+			datosRegistroProy1[1] = $('[name=nombreProy]').val();
+			datosRegistroProy1[2] = $('[name=fechaIniProy]').val();
+			datosRegistroProy1[3] = $('[name=fechafinProy]').val();
+			datosRegistroProy1[4] = $('[name=montoProy]').val();
+			datosRegistroProy1[5] = $('[name=estadoProy]').val();
+			datosRegistroProy1[6] = $('[name=descripcionProy]').val();*/
 
-        //alert("nombre: "+datosRegistroProy1[1]+" y FECHA-FIN: "+datosRegistroProy1[3]+" ESTADO: "+datosRegistroProy1[5]);
-        $('#infoCrearProy').show("fast");
-		$('#codProy').html( $.cookie('codP') );//SE AGREGA AL div #infoCrearProy el codigo del proyecto
-		$('#nameProy').html( $.cookie('nameP') );
-
-		$("#formNewProy").hide("fast");
-		$('#formNewObj').show("fast");
-		$('#codigoObj').html( $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
-		//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
-          $('#codProy1').html( $.cookie('codP') );
-          $('#nameProy1').html( $.cookie('nameP') );
-          $('#nameProy2').html( $.cookie('nameP') );
-          $('#dateIniProy1').html( $.cookie('dateIniP') );
-          $('#dateFinProy1').html( $.cookie('datefinP') );
-          $('#montoProy1').html( $.cookie('montoP') );
-          $('#estadoProy1').html( $.cookie('estadoP') );
-          $('#descripcionProy1').html( $.cookie('descripcionP') );
-      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+	        //alert("nombre: "+datosRegistroProy1[1]+" y FECHA-FIN: "+datosRegistroProy1[3]+" ESTADO: "+datosRegistroProy1[5]);
+	        
+	        $('#codProy').html( $.cookie('codP') );//SE AGREGA AL div #infoCrearProy el codigo del proyecto
+			$('#nameProy').html( $.cookie('nameP') );
+	        $('#infoCrearProy').show("fast");
+			$("#formNewProy").hide("fast");
+			$('#formNewObj').show("fast");
+			$('#codigoObj').html( $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
+			//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
+	          $('#codProy1').html( $.cookie('codP') );
+	          $('#nameProy1').html( $.cookie('nameP') );
+	          $('#nameProy2').html( $.cookie('nameP') );
+	          $('#dateIniProy1').html( $.cookie('dateIniP') );
+	          $('#dateFinProy1').html( $.cookie('datefinP') );
+	          $('#montoProy1').html( $.cookie('montoP') );
+	          $('#estadoProy1').html( $.cookie('estadoP') );
+	          $('#descripcionProy1').html( $.cookie('descripcionP') );
+	      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+	 }
 
    }
 
@@ -308,47 +321,55 @@ function addObjectFromModify( ){
 			//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
 			$.cookie('codOP', $.cookie('codP')+".1"  );
 		}
-    	
-    	//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
-    	$.cookie('nameOP', $('[name=nombreObj]').val());
-    	$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
-    	$.cookie('datefinOP', $('[name=fechafinObj]').val());
-    	$.cookie('montoOP', $('[name=montoObj]').val());
-    	$.cookie('estadoOP', $('[name=estadoObj]').val());
-    	$.cookie('descripOP', $('[name=descripcionObj]').val());
-			/*datosRegistroProy1[7] = datosRegistroProy1[0] +".1";
-			datosRegistroProy1[8] = $('[name=nombreObj]').val();
-			datosRegistroProy1[9] = $('[name=fechaIniObj]').val();
-			datosRegistroProy1[10] = $('[name=fechafinObj]').val();
-			datosRegistroProy1[11] = $('[name=montoObj]').val();
-			datosRegistroProy1[12] = $('[name=estadoObj]').val();
-			datosRegistroProy1[13] = $('[name=descripcionObj]').val();*/
-			//alert("Listo");
-			//alert("CODIGO: "+datosRegistroProy1[7]+" y FECHA-FIN: "+datosRegistroProy1[10]+" ESTADO: "+datosRegistroProy1[12]);
 
-		$('#codObjP').html( $.cookie('codOP') );//SE AGREGA AL div el codigo del objetivo
-		
-		$('#nameObjP').html( $.cookie('nameOP') );
+		$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
+	    $.cookie('datefinOP', $('[name=fechafinObj]').val());
 
-		//alert( $("#codigoObj").text() );
-		console.log( $("#codigoObj").text() );
+    	if ($.cookie('dateIniOP')>$.cookie('datefinOP')){
+			alert("Fecha de Finalización Incorrecta");
+			$('#formNewObj').show("fast");//esconde el formulario de objetivo
+        	$('#formNewMeta').hide("fast");//muestra el formulario de meta
+		}
+		else{
+	    	//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
+	    	$.cookie('nameOP', $('[name=nombreObj]').val());
+	    	$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
+	    	$.cookie('datefinOP', $('[name=fechafinObj]').val());
+	    	$.cookie('montoOP', $('[name=montoObj]').val());
+	    	$.cookie('estadoOP', $('[name=estadoObj]').val());
+	    	$.cookie('descripOP', $('[name=descripcionObj]').val());
+				/*datosRegistroProy1[7] = datosRegistroProy1[0] +".1";
+				datosRegistroProy1[8] = $('[name=nombreObj]').val();
+				datosRegistroProy1[9] = $('[name=fechaIniObj]').val();
+				datosRegistroProy1[10] = $('[name=fechafinObj]').val();
+				datosRegistroProy1[11] = $('[name=montoObj]').val();
+				datosRegistroProy1[12] = $('[name=estadoObj]').val();
+				datosRegistroProy1[13] = $('[name=descripcionObj]').val();*/
+				//alert("Listo");
+				//alert("CODIGO: "+datosRegistroProy1[7]+" y FECHA-FIN: "+datosRegistroProy1[10]+" ESTADO: "+datosRegistroProy1[12]);
 
-		$('#formNewObj').hide("fast");//esconde el formulario de objetivo
-        $('#formNewMeta').show("fast");//muestra el formulario de meta
-        $('#codigoMeta').html( $.cookie('codOP') +".1"  );//codigo meta + .1 de nueva meta
-        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
-          
-          $('#accordion2').show("fast");
-          $('#codObj1').html( $.cookie('codOP') );
-          $('#nameObj1').html( $.cookie('nameOP') );
-          $('#nameObj2').html( $.cookie('nameOP') );
-          $('#dateIniObj1').html( $.cookie('dateIniOP') );
-          $('#dateFinObj1').html( $.cookie('datefinOP') );
-          $('#montoObj1').html( $.cookie('montoOP') );
-          $('#estadoObj1').html( $.cookie('estadoOP') );
-          $('#descripcionObj1').html( $.cookie('descripcionOP') );
-      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+			$('#codObjP').html( $.cookie('codOP') );//SE AGREGA AL div el codigo del objetivo
+			
+			$('#nameObjP').html( $.cookie('nameOP') );
 
+			//alert( $("#codigoObj").text() );
+			console.log( $("#codigoObj").text() );
+			$('#formNewObj').hide("fast");//esconde el formulario de objetivo
+	        $('#formNewMeta').show("fast");//muestra el formulario de meta
+	        $('#codigoMeta').html( $.cookie('codOP') +".1"  );//codigo meta + .1 de nueva meta
+	        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
+	          
+	          $('#accordion2').show("fast");
+	          $('#codObj1').html( $.cookie('codOP') );
+	          $('#nameObj1').html( $.cookie('nameOP') );
+	          $('#nameObj2').html( $.cookie('nameOP') );
+	          $('#dateIniObj1').html( $.cookie('dateIniOP') );
+	          $('#dateFinObj1').html( $.cookie('datefinOP') );
+	          $('#montoObj1').html( $.cookie('montoOP') );
+	          $('#estadoObj1').html( $.cookie('estadoOP') );
+	          $('#descripcionObj1').html( $.cookie('descripcionOP') );
+	      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+	      }
 	    }
 
 	function primerMeta(){
@@ -360,55 +381,61 @@ function addObjectFromModify( ){
 			console.log("primer meta");
 		}
 
-		//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVA META
-		
-		$.cookie('nameMP', $('[name=nombreMeta]').val() );
 		$.cookie('dateIniMP', $('[name=fechaIniMeta]').val());
 		$.cookie('datefinMP', $('[name=fechafinMeta]').val());
-		$.cookie('montoMP', $('[name=montoMeta]').val() );
-		$.cookie('estadoMP', $('[name=estadoMeta]').val());
-		$.cookie('descripMP', $('[name=descripcionMeta]').val());
-		
-		
-		/*datosRegistroProy1[14] = datosRegistroProy1[7] +".1";
-		datosRegistroProy1[15] = $('[name=nombreMeta]').val();
-		datosRegistroProy1[16] = $('[name=fechaIniMeta]').val();
-		datosRegistroProy1[17] = $('[name=fechafinMeta]').val();
-		datosRegistroProy1[18] = $('[name=montoMeta]').val();
-		datosRegistroProy1[19] = $('[name=estadoMeta]').val();
-		datosRegistroProy1[20] = $('[name=descripcionMeta]').val();*/
-		//alert("Listo");
-		//alert("CODIGO: "+datosRegistroProy1[7]+" y FECHA-FIN: "+datosRegistroProy1[10]+" ESTADO: "+datosRegistroProy1[12]);
 
-		$('#codMetaP').html( $.cookie('codMP') );
-		$('#nameMetaP').html( $.cookie('nameMP'));
-		if($primerObjetivo == true && $primerMeta == false){
-			$('#filaMeta').show("fast");
-
-		}else if($primerMeta == true){
-			$('#filaActi').show("fast");
+		if ($.cookie('dateIniMP')>$.cookie('datefinMP')){
+			alert("Fecha de Finalización Incorrecta");
+			$('#formNewMeta').show("fast");//esconde el formulario de objetivo
+        	$('#formNewActi').hide("fast");//muestra el formulario de meta
 		}
+		else{
+			//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVA META
+			$.cookie('nameMP', $('[name=nombreMeta]').val() );
+			$.cookie('dateIniMP', $('[name=fechaIniMeta]').val());
+			$.cookie('datefinMP', $('[name=fechafinMeta]').val());
+			$.cookie('montoMP', $('[name=montoMeta]').val() );
+			$.cookie('estadoMP', $('[name=estadoMeta]').val());
+			$.cookie('descripMP', $('[name=descripcionMeta]').val());
+			
+			
+			/*datosRegistroProy1[14] = datosRegistroProy1[7] +".1";
+			datosRegistroProy1[15] = $('[name=nombreMeta]').val();
+			datosRegistroProy1[16] = $('[name=fechaIniMeta]').val();
+			datosRegistroProy1[17] = $('[name=fechafinMeta]').val();
+			datosRegistroProy1[18] = $('[name=montoMeta]').val();
+			datosRegistroProy1[19] = $('[name=estadoMeta]').val();
+			datosRegistroProy1[20] = $('[name=descripcionMeta]').val();*/
+			//alert("Listo");
+			//alert("CODIGO: "+datosRegistroProy1[7]+" y FECHA-FIN: "+datosRegistroProy1[10]+" ESTADO: "+datosRegistroProy1[12]);
 
-		$('#formNewMeta').hide("fast");//esconde el formulario de objetivo
+			$('#codMetaP').html( $.cookie('codMP') );
+			$('#nameMetaP').html( $.cookie('nameMP'));
+			if($primerObjetivo == true && $primerMeta == false){
+				$('#filaMeta').show("fast");
 
-		
+			}else if($primerMeta == true){
+				$('#filaActi').show("fast");
+			}
 
-        $('#formNewActi').show("fast");//muestra el formulario de meta
-        //$('#btnRegistroNuevoActi').text('Terminar');//Cambio del texto del boton
+			$('#formNewMeta').hide("fast");//esconde el formulario de objetivo
+	        $('#formNewActi').show("fast");//muestra el formulario de meta
+	        //$('#btnRegistroNuevoActi').text('Terminar');//Cambio del texto del boton
 
-        $('#codigoActi').html( $.cookie('codMP') +".1"  );//codigo meta + .1 de nueva actividad
+	        $('#codigoActi').html( $.cookie('codMP') +".1"  );//codigo meta + .1 de nueva actividad
 
-        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
-          $('#accordion3').show("fast");
-          $('#codMet1').html( $.cookie('codMP') );
-          $('#nameMet1').html( $.cookie('nameMP') );
-          $('#nameMet2').html( $.cookie('nameMP') );
-          $('#dateIniMet1').html( $.cookie('dateIniMP') );
-          $('#dateFinMet1').html( $.cookie('datefinMP') );
-          $('#montoMet1').html( $.cookie('montoMP') );
-          $('#estadoMet1').html( $.cookie('estadoMP') );
-          $('#descripcionMet1').html( $.cookie('descripcionMP') );
-      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+	        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
+	          $('#accordion3').show("fast");
+	          $('#codMet1').html( $.cookie('codMP') );
+	          $('#nameMet1').html( $.cookie('nameMP') );
+	          $('#nameMet2').html( $.cookie('nameMP') );
+	          $('#dateIniMet1').html( $.cookie('dateIniMP') );
+	          $('#dateFinMet1').html( $.cookie('datefinMP') );
+	          $('#montoMet1').html( $.cookie('montoMP') );
+	          $('#estadoMet1').html( $.cookie('estadoMP') );
+	          $('#descripcionMet1').html( $.cookie('descripcionMP') );
+	      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+      }
 	}
 
 	function primerActi(){
