@@ -263,7 +263,7 @@
             </tr>
             <tr>
               <TD>Monto: </TD>
-              <TD> <input type="number" name="montoProy" class="form-control" required> </TD>
+              <TD> <input type="number" name="montoProy" class="form-control" min="50000" max="100000" required> </TD>
             </tr>
             <tr>
               <TD>Estado: </TD>
@@ -313,20 +313,16 @@
         </tr>
         <tr>
           <TD>Fecha de inicio: </TD>
-          <?php 
-          $dateI=$_COOKIE['dateIniP'];
-          $dateF=$_COOKIE['datefinP'];
-          echo"
           <TD> 
-            <input type=\"date\" name=\"fechaIniObj\" step=\"1\" min=\"$dateI\" max=\"$dateF\" required>
+            <input type="date" name="fechaIniObj" step="1" min="" max="" required>
           </TD>
           
         </tr>
         <tr>
           <TD>Fecha de finalización: </TD>
-          <TD> <input type=\"date\" name=\"fechafinObj\" step=\"1\" min=\"$dateI\" max=\"$dateF\" required>
-          </TD>";
-          ?>
+          <TD> <input type="date" name="fechafinObj" step="1" min="" max="" required>
+          </TD>
+          
         </tr>
         <tr>
           <TD>Monto: </TD>
@@ -371,17 +367,13 @@
           </tr>
           <tr>
             <TD>Fecha de inicio: </TD>
-            <?php 
-              $dateIniOP=$_COOKIE['dateIniOP'];
-              $datefinOP=$_COOKIE['datefinOP'];
-              echo"
             <TD>
-              <input type=\"date\" name=\"fechaIniMeta\" step=\"1\" min=\"$dateIniOP\" max=\"$datefinOP\">
+              <input type="date" name="fechaIniMeta" step="1" min="" max="">
             </TD>
           </tr>
           <tr>
             <TD>Fecha de finalización: </TD>
-            <TD> <input type=\"date\" name=\"fechafinMeta\" step=\"1\" min=\" $dateIniOP\" max=\"$datefinOP\">
+            <TD> <input type="date" name="fechafinMeta" step="1" min="" max="">
             </TD>";
             ?>
           </tr>
@@ -426,12 +418,12 @@
             <tr>
               <TD>Fecha de inicio: </TD>
               <TD> <!--<input type="text" name="fechaIniProy"> -->
-                <input type="date" name="fechaIniActi" step="1" min="1900-01-01" max="2099-12-31">
+                <input type="date" name="fechaIniActi" step="1" min="" max="">
               </TD>
             </tr>
             <tr>
               <TD>Fecha de finalización: </TD>
-              <TD> <input type="date" name="fechafinActi" step="1" min="1900-01-01" max="2099-12-31">
+              <TD> <input type="date" name="fechafinActi" step="1" min="" max="">
               </TD>
             </tr>
             <tr>

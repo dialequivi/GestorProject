@@ -265,10 +265,10 @@ function addObjectFromModify( ){
 	}
 
 	function datosProy1(){
-		$.cookie('dateIniP', $('[name=fechaIniProy]').val() );
-	    $.cookie('datefinP', $('[name=fechafinProy]').val() );
+		$.cookie('dIniP', $('[name=fechaIniProy]').val() );
+	    $.cookie('dfinP', $('[name=fechafinProy]').val() );
 
-		if ($.cookie('dateIniP')>$.cookie('datefinP')){
+		if ($.cookie('dIniP')>$.cookie('dfinP')){
         	alert("Fecha de Finalización Incorrecta");
         	$("#formNewProy").show("fast");
 			$('#formNewObj').fast("fast");
@@ -279,6 +279,12 @@ function addObjectFromModify( ){
 	        $.cookie('nameP', $('[name=nombreProy]').val() );
 	        $.cookie('dateIniP', $('[name=fechaIniProy]').val() );
 	        $.cookie('datefinP', $('[name=fechafinProy]').val() );
+	        //Cookies enviadas para validar fechas del formulario de objetivos
+	        $('[name=fechaIniObj]').attr('min', $.cookie('dateIniP'));
+	        $('[name=fechaIniObj]').attr('max', $.cookie('datefinP'));
+	        $('[name=fechafinObj]').attr('min', $.cookie('dateIniP'));
+	        $('[name=fechafinObj]').attr('max', $.cookie('datefinP'));
+	        //Se cierra el bloque de cookies enviadas al formulario de objetivos
 	        $.cookie('montoP', $('[name=montoProy]').val() );
 	        $.cookie('estadoP', $('[name=estadoProy]').val() );
 	        $.cookie('descripcionP', $('[name=descripcionProy]').val() );
@@ -322,10 +328,10 @@ function addObjectFromModify( ){
 			$.cookie('codOP', $.cookie('codP')+".1"  );
 		}
 
-		$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
-	    $.cookie('datefinOP', $('[name=fechafinObj]').val());
+		$.cookie('dIniOP', $('[name=fechaIniObj]').val());
+	    $.cookie('dfinOP', $('[name=fechafinObj]').val());
 
-    	if ($.cookie('dateIniOP')>$.cookie('datefinOP')){
+    	if ($.cookie('dIniOP')>$.cookie('dfinOP')){
 			alert("Fecha de Finalización Incorrecta");
 			$('#formNewObj').show("fast");//esconde el formulario de objetivo
         	$('#formNewMeta').hide("fast");//muestra el formulario de meta
@@ -335,6 +341,12 @@ function addObjectFromModify( ){
 	    	$.cookie('nameOP', $('[name=nombreObj]').val());
 	    	$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
 	    	$.cookie('datefinOP', $('[name=fechafinObj]').val());
+	    	 //Cookies enviadas para validar fechas del formulario de metas
+	        $('[name=fechaIniMeta]').attr('min', $.cookie('dateIniOP'));
+	        $('[name=fechaIniMeta]').attr('max', $.cookie('datefinOP'));
+	        $('[name=fechafinMeta]').attr('min', $.cookie('dateIniOP'));
+	        $('[name=fechafinMeta]').attr('max', $.cookie('datefinOP'));
+	        //Se cierra el bloque de cookies enviadas al formulario de metas
 	    	$.cookie('montoOP', $('[name=montoObj]').val());
 	    	$.cookie('estadoOP', $('[name=estadoObj]').val());
 	    	$.cookie('descripOP', $('[name=descripcionObj]').val());
@@ -381,10 +393,10 @@ function addObjectFromModify( ){
 			console.log("primer meta");
 		}
 
-		$.cookie('dateIniMP', $('[name=fechaIniMeta]').val());
-		$.cookie('datefinMP', $('[name=fechafinMeta]').val());
+		$.cookie('dIniMP', $('[name=fechaIniMeta]').val());
+		$.cookie('dfinMP', $('[name=fechafinMeta]').val());
 
-		if ($.cookie('dateIniMP')>$.cookie('datefinMP')){
+		if ($.cookie('dIniMP')>$.cookie('dfinMP')){
 			alert("Fecha de Finalización Incorrecta");
 			$('#formNewMeta').show("fast");//esconde el formulario de objetivo
         	$('#formNewActi').hide("fast");//muestra el formulario de meta
@@ -394,6 +406,12 @@ function addObjectFromModify( ){
 			$.cookie('nameMP', $('[name=nombreMeta]').val() );
 			$.cookie('dateIniMP', $('[name=fechaIniMeta]').val());
 			$.cookie('datefinMP', $('[name=fechafinMeta]').val());
+			//Cookies enviadas para validar fechas del formulario de actividades
+	        $('[name=fechaIniActi]').attr('min', $.cookie('dateIniMP'));
+	        $('[name=fechaIniActi]').attr('max', $.cookie('datefinMP'));
+	        $('[name=fechafinActi]').attr('min', $.cookie('dateIniMP'));
+	        $('[name=fechafinActi]').attr('max', $.cookie('datefinMP'));
+	        //Se cierra el bloque de cookies enviadas al formulario de actividades
 			$.cookie('montoMP', $('[name=montoMeta]').val() );
 			$.cookie('estadoMP', $('[name=estadoMeta]').val());
 			$.cookie('descripMP', $('[name=descripcionMeta]').val());
