@@ -52,7 +52,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Consultas <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Proyectos vigentes</a></li>
+                  <li><a href="#" id="menuProyVigentes">Proyectos vigentes</a></li>
                   <li><a href="#">Proyectos Ejecutados</a></li>
                   <li><a href="#">Proyectos por fecha</a></li>
                 </ul>
@@ -266,7 +266,7 @@
         <!--<form class="form-cproject" action="php/registrarProyecto.php" method="post" enctype="multipart/form-data" name="datos" id="registrarProy">-->
 
         <form class="form-cproject" id="registrarProy" method="POST">
-          <h2 class="form-cproject-heading" align="center"> Crear un nuevo proyecto</h2>
+          <h2 id="tituloProyecto" class="form-cproject-heading" align="center"> Crear un nuevo proyecto</h2>
           <table border=0 align=CENTER >
             <TR>
               <TD>Código: </TD>
@@ -297,6 +297,8 @@
               <TD><select class="form-control" name="estadoProy">
                 <option value=1>Activo</option>
                 <option value=2>Finalizado</option>
+                <option value=3>Cancelado</option>
+                <option value=4>Inactivo</option> 
 
               </select> </TD>
             </tr>
@@ -328,7 +330,7 @@
    <!--FORMULARIO DE REGISTRO DE OBJETIVO-->
    <div class="jumbotron" id="formNewObj" style="display:none;">
     <form class="form-cproject" id="registrarObj">
-      <h2 class="form-cproject-heading" align="center">Agregar Objetivo</h2>
+      <h2 id="tituloObjetivo" class="form-cproject-heading" align="center">Agregar Objetivo</h2>
       <table border=0 align=CENTER >
         <TR>
           <TD>Código: </TD>
@@ -357,7 +359,9 @@
           <TD>Estado: </TD>
           <TD> <select name="estadoObj" >
             <option value=1>Activo</option>
-            <option value=2>Finalzado</option>
+            <option value=2>Finalizado</option>
+            <option value=3>Cancelado</option>
+            <option value=4>Inactivo</option>
 
           </select> </TD>
         </tr>
@@ -380,7 +384,7 @@
     <!--FORMULARIO DE REGISTRO DE META-->
     <div class="jumbotron" id="formNewMeta" style="display:none;">
       <form class="form-cproject" id="registrarMeta">
-        <h2 class="form-cproject-heading" align="center">Agregar Meta</h2>
+        <h2 id="tituloMeta" class="form-cproject-heading" align="center">Agregar Meta</h2>
         <table border=0 align=CENTER >
           <TR>
             <TD>Código: </TD>
@@ -410,6 +414,8 @@
             <TD> <select name="estadoMeta" >
               <option value=1>Activo</option>
               <option value=2>Finalizado</option>
+              <option value=3>Cancelado</option>
+                <option value=4>Inactivo</option> 
 
             </select> </TD>
           </tr>
@@ -429,7 +435,7 @@
       <!--FORMULARIO DE REGISTRO DE ACTIVIDAD-->
       <div class="jumbotron" id="formNewActi" style="display:none;">
         <form class="form-cproject" id="registrarActividad">
-          <h2 class="form-cproject-heading" align="center">Agregar Actividad</h2>
+          <h2 id="tituloActividad" class="form-cproject-heading" align="center">Agregar Actividad</h2>
           <table border=0 align=CENTER >
             <TR>
               <TD>Código: </TD>
@@ -456,9 +462,11 @@
             </tr>
             <tr>
             <TD>Estado: </TD>
-            <TD> <select name="estadoActi" id="punto" style="display:none;">
+            <TD> <select name="estadoActi" id="punto" >
               <option value=1>Activo</option>
               <option value=2>Finalizado</option>
+              <option value=3>Cancelado</option>
+                <option value=4>Inactivo</option> 
 
             </select> </TD>
           </tr>
@@ -516,7 +524,7 @@
                       </a></h4>
                     </div>
                    <div id=\"cont2\">   
-                      <button  id=\"$row[pro_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnNuevoObjPro\">Agregar Objetivo</button>
+                      <button  id=\"$row[pro_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnNuevoObjPro\">Agregar Objetivo</button>
                       
                      
                    </div>
@@ -546,6 +554,8 @@
                     <TD class=\"default\"> $row[pro_descripcion]</TD>
                     <TD class=\"default\"> $row[usu_nombre_completo]</TD>
                     <TD class=\"default\"> $row[est_nombre]</TD>
+                    <TD> <button  id=\"$row[pro_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyPro\">Modificar Proyecto</button> </TD>
+
                   </TR>
                 </table>
                 <!-- Objetivos -->
@@ -631,7 +641,7 @@
 
                                     <div id=\"cont2\">
                                       <button  id=\"$row3[me_id]\" type=\"button\" class=\"btn btn-info\" name=\"btnNuevoActividadPro\">Agregar Actividad</button>
-                                      <button  id=\"$row3[me_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyMetaPro\">Modificar Meta</button>
+                                      
                                       
                                       
                                     </div> 
@@ -660,6 +670,7 @@
                                         <TD class=\"default\"> $row3[me_descripcion]</TD>
                                         <TD class=\"default\"> $row3[objetivo_obj_id]</TD>
                                         <TD class=\"default\"> $row3[est_nombre]</TD>
+                                        <TD> <button  id=\"$row3[me_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyMetaPro\">Modificar Meta</button> </TD>
                                       </TR>
                                     </table>
                                     <!-- ACTIVIDADES-->
@@ -684,7 +695,7 @@
                                                 </a></h4>
                                               </div>
                                               <div id=\"cont2\">
-                                                <button  id=\"$row4[act_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyActividadPro\">Modificar Actividad</button>
+                                                <!--<button  id=\"$row4[act_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyActividadPro\">Modificar Actividad</button>-->
                                               </div>
                                             </div>
                                           </div>
@@ -711,6 +722,7 @@
                                                   <TD class=\"default\"> $row4[act_descripcion]</TD>
                                                   <TD class=\"default\"> $row4[meta_me_id]</TD>
                                                   <TD class=\"default\"> $row4[est_nombre]</TD>
+                                                  <TD> <button  id=\"$row4[act_id]\" type=\"button\" class=\"btn btn-danger\" name=\"btnModifyActividadPro\">Modificar Actividad</button> </TD>
                                                 </TR>
                                               </table>
                                             </div>
