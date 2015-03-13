@@ -77,6 +77,9 @@ function addObjectFromModify( ){
 	//alert($codigo);
 	console.log("Codigo proyecto: "+$codigoProyecto);
 	$.cookie('codP', $codigoProyecto );
+	$('[name=btnRegistroNuevoObj]').attr('value', 'Continuar');//Cambiar el nombre del boton
+	$("#tituloObjetivo").text('Agregar Objetivo');//Se actualiza por si se ha cambiado  por Modificar Proyecto
+
 	agregarObjetivo();
 }
 
@@ -97,8 +100,16 @@ function addActiFromModify(){
 }
 
 /*Permite la modificación de un proyecto*/
+var modPro = 0;
+var thisProyect;
 function modifyProyecto(){
+	$('[name=btnRegistroNuevoProy]').attr('value', 'Finalizar');//Cambiar el nombre del botón
+	if(modPro == 0){ //Salvar el objeto y poder más adelante mostrar los campos modificados del formulario en la tabla de informacion del proyecto
+		thisProyect = this;
+		modPro++;
+	}
 	if($modifcarProyecto == false){ 			//OBTENER LOS VALORES
+		
 		var $fila = $(this).closest("tr"); //Busca la fila más cercana
 		var $celda = $fila.find(".default"); // Busca todas las celdas
 		$campo=0;
@@ -112,7 +123,6 @@ function modifyProyecto(){
 					$('[name=nombreProy]').val( $.trim($(this).text()) );
 					break;
 				case 2:
-					//var dat = $(this).text();
 					$('[name=fechaIniProy]').val( $.trim( $(this).text() ) );//eliminar espacios en blanco
 					break;
 				case 3:
@@ -155,9 +165,12 @@ function modifyProyecto(){
 		$('#tituloProyecto').html("Modificar Proyecto");
 		$('#formNewProy').show("fast");
 	}
-	else{//ESTABLECER LOS VALORES UNA VEZ SE HA HECHO LA MOFICICACIÓN
+	else{//REFRESCAR LOS VALORES EN LA TABLA, UNA VEZ SE HA HECHO LA MOFICICACIÓN
 		$modifcarProyecto = false;
-		var $fila = $(this).closest("tr"); //Busca la fila más cercana
+		modPro = 0;
+
+		
+		var $fila = $(thisProyect).closest("tr"); //Busca la fila más cercana
 		var $celda = $fila.find(".default"); // Busca todas las celdas
 		$campo=0;
 		$.each($celda, function(){// Visits every single <td> element
@@ -166,45 +179,43 @@ function modifyProyecto(){
 				case 0:
 					break;
 				case 1:
-					 $(this).innerHTML = $.cookie('nameP') ;
+					 //$(this).text('CHARLY');
+					 $(this).text($.cookie('nameP') );
 					break;
 				case 2:
-					//var dat = $(this).text();
-					//$('[name=fechaIniProy]').val( $.trim( $(this).text() ) );//eliminar espacios en blanco
+					$(this).text($.cookie('dateIniP') );
 					break;
 				case 3:
-					//$('[name=fechafinProy]').val( $.trim( $(this).text() ) );
+					$(this).text($.cookie('datefinP') );
 					break;
 				case 4:
-					//$('[name=montoProy]').val( $.trim($(this).text()) );
+					$(this).text($.cookie('montoP') );
 					break;
 				case 5:
-					//$('[name=descripcionProy]').val( $.trim( $(this).text()) );
+					$(this).text($.cookie('descripcionP') );
 					break;
 				case 6:
 					break;
 				case 7:
-					/*var esta = $.trim( $(this).text() ); //trim elinima espacios en blanco al inicio y final de la cadena
 
-					if( esta == "Activo" ){ //strcmp($obtenido, "disponible") != 0 
-						$('[name=estadoProy]').val( 1 );
+					if( $.cookie('estadoP') == 1 ){ 
+						$(this).text('Activo');
 					}
-					else if(esta == "Finalizado"){
-						$('[name=estadoProy]').val( 2 );
+					else if( $.cookie('estadoP') == 2 ){ 
+						$(this).text('Finalizado');
 					}
-					else if(esta == "Cancelado"){
-						$('[name=estadoProy]').val( 3 );
+					else if( $.cookie('estadoP') == 3 ){ 
+						$(this).text('Cancelado');
 					}
-					else if(esta == "Inactivo"){ // "Inactivo"
-						$('[name=estadoProy]').val( 4 );
-					}*/
-					//$('[name=estadoObj]').val( $(this).text() );
+					else if( $.cookie('estadoP') == 4 ){ 
+						$(this).text('Inactivo');
+					}
+					
 					break;
 
 			}
 			
 			$campo++;
-			
 		})
 
 	}
@@ -222,8 +233,7 @@ function guardarProyectoModify(){
 	            success: function(RespHTML) {
 	                alert(RespHTML);
 					$('#formNewProy').hide("fast");//esconde el formulario de objetivo
-					modifyProyecto();
-
+					modifyProyecto(); //SE LLAMA PERO PARA REFRESCAR LOS DATOS EN LA TABLA (CONDCIONAL ELSE)
 	            },
 	            error: function() {
 	                alert('Lo sentimos, se ha producido un error.');
@@ -233,7 +243,14 @@ function guardarProyectoModify(){
 }
 	
 /*Permite la modificación de un objetivo*/
+var modObjP = 0;
+var thisObject;
 function modifyObject(){
+	$('[name=btnRegistroNuevoObj]').attr('value', 'Finalizar');
+	if(modObjP == 0){
+		thisObject = this;
+		modObjP++;
+	}
 	//$codigoObjetibo = this.id;
 	//console.log("Codigo objetivo: "+$codigoObjetibo);
 	
@@ -247,65 +264,119 @@ function modifyObject(){
 
 	alert($text);
 	console.log($text);*/
-	var $row = $(this).closest("tr"); // Finds the closest row <tr> 
-	var $tds = $row.find(".default"); // Finds all children <td> elements
+	if($modificarObjetivo == false){		//OBTENER LOS VALORES
+		var $row = $(this).closest("tr"); // Finds the closest row <tr> 
+		var $tds = $row.find(".default"); // Finds all children <td> elements
 
-	$campo = 0;
-	$.each($tds, function(){// Visits every single <td> element
-		//console.log($(this).text());// Prints out the text within the <td>
-		switch ($campo){
-			case 0:
-				$("#codigoObj").text( $.trim($(this).text()) );
-				break;
-			case 1:
-				$('[name=nombreObj]').val( $.trim($(this).text()) );
-				break;
-			case 2:
-				//var dat = $(this).text();
-				$('[name=fechaIniObj]').val( $.trim( $(this).text() ) );//eliminar espacios en blanco
-				break;
-			case 3:
-				$('[name=fechafinObj]').val( $.trim( $(this).text() ) );
-				break;
-			case 4:
-				$('[name=montoObj]').val( $.trim($(this).text()) );
-				break;
-			case 5:
-				$('[name=descripcionObj]').val( $.trim( $(this).text()) );
-				break;
-			case 6:
-				break;
-			case 7:
-				var esta = $.trim( $(this).text() ); //trim elinima espacios en blanco al inicio y final de la cadena
+		$campo = 0;
+		$.each($tds, function(){// Visits every single <td> element
+			//console.log($(this).text());// Prints out the text within the <td>
+			switch ($campo){
+				case 0:
+					$("#codigoObj").text( $.trim($(this).text()) );
+					break;
+				case 1:
+					$('[name=nombreObj]').val( $.trim($(this).text()) );
+					break;
+				case 2:
+					//var dat = $(this).text();
+					$('[name=fechaIniObj]').val( $.trim( $(this).text() ) );//eliminar espacios en blanco
+					break;
+				case 3:
+					$('[name=fechafinObj]').val( $.trim( $(this).text() ) );
+					break;
+				case 4:
+					$('[name=montoObj]').val( $.trim($(this).text()) );
+					break;
+				case 5:
+					$('[name=descripcionObj]').val( $.trim( $(this).text()) );
+					break;
+				case 6:
+					break;
+				case 7:
+					var esta = $.trim( $(this).text() ); //trim elinima espacios en blanco al inicio y final de la cadena
 
-				if( esta == "Activo" ){ //strcmp($obtenido, "disponible") != 0 
-					$('[name=estadoObj]').val( 1 );
-				}
-				else if(esta == "Finalizado"){
-					$('[name=estadoObj]').val( 2 );
-				}
-				else if(esta == "Cancelado"){
-					$('[name=estadoObj]').val( 3 );
-				}
-				else if(esta == "Inactivo"){ // "Inactivo"
-					$('[name=estadoObj]').val( 4 );
-				}
-				//$('[name=estadoObj]').val( $(this).text() );
-				break;
+					if( esta == "Activo" ){ //strcmp($obtenido, "disponible") != 0 
+						$('[name=estadoObj]').val( 1 );
+					}
+					else if(esta == "Finalizado"){
+						$('[name=estadoObj]').val( 2 );
+					}
+					else if(esta == "Cancelado"){
+						$('[name=estadoObj]').val( 3 );
+					}
+					else if(esta == "Inactivo"){ // "Inactivo"
+						$('[name=estadoObj]').val( 4 );
+					}
+					//$('[name=estadoObj]').val( $(this).text() );
+					break;
 
-		}
-		
-		$campo++;
-		
-	})
+			}
+			
+			$campo++;
+			
+		})
 
-	$modificarObjetivo = true;
-	$primerObjetivo = true;
-	$('#tituloObjetivo').html("Modificar Objetivo");
-	$('#formNewObj').show("fast");
+		$modificarObjetivo = true;
+		$primerObjetivo = true;
+		$('#tituloObjetivo').html("Modificar Objetivo");
+		$('#formNewObj').show("fast");
+	}
+	else{
+		$modificarObjetivo = false;
+		modObjP = 0;
+		var $fila = $(thisObject).closest("tr"); //Busca la fila más cercana
+		var $celda = $fila.find(".default"); // Busca todas las celdas
+		$campo=0;
+		$.each($celda, function(){// Visits every single <td> element
+			//console.log($(this).text());// Prints out the text within the <td>
+			switch ($campo){
+				case 0:
+					break;
+				case 1:
+					 //$(this).text('CHARLY');
+					 $(this).text($.cookie('nameOP') );
+					break;
+				case 2:
+					$(this).text($.cookie('dateIniOP') );
+					break;
+				case 3:
+					$(this).text($.cookie('datefinOP') );
+					break;
+				case 4:
+					$(this).text($.cookie('montoOP') );
+					break;
+				case 5:
+					$(this).text($.cookie('descripOP') );
+					break;
+				case 6:
+					break;
+				case 7:
+
+					if( $.cookie('estadoOP') == 1 ){ 
+						$(this).text('Activo');
+					}
+					else if( $.cookie('estadoOP') == 2 ){ 
+						$(this).text('Finalizado');
+					}
+					else if( $.cookie('estadoOP') == 3 ){ 
+						$(this).text('Cancelado');
+					}
+					else if( $.cookie('estadoOP') == 4 ){ 
+						$(this).text('Inactivo');
+					}
+					
+					break;
+
+			}
+			
+			$campo++;
+		})
+	}
 }
 
 /*Se guarda el objetivo modificado*/
+
 	function guardarObjetivoModify(){
 		//Modificar Objetivo
 		//console.log( $("#tituloObjetivo").text() );
@@ -324,6 +395,7 @@ function modifyObject(){
 	            success: function(RespHTML) {
 	                alert(RespHTML);
 					$('#formNewObj').hide("fast");//esconde el formulario de objetivo
+					modifyObject();//se llama para refrescar los valores en la tabla una vez se ha hecho la modificación guardado en la BD 
 	            },
 	            error: function() {
 	                alert('Lo sentimos, se ha producido un error.');
@@ -331,64 +403,124 @@ function modifyObject(){
 	        });
 	}
 
-
+/*Permite la modoficación de una meta*/
+var modMeta = 0;
+var thisMeta;
 function modifyMeta(){
-	var $fila = $(this).closest("tr"); //Busca la fila más cercana
-	var $celda = $fila.find(".default"); // Busca todas las celdas
-	$campo=0;
-	$.each($celda, function(){// Visits every single <td> element
-		//console.log($(this).text());// Prints out the text within the <td>
-		switch ($campo){
-			case 0:
-				$('#codigoMeta').text( $.trim($(this).text()) );
-				break;
-			case 1:
-				$('[name=nombreMeta]').val( $.trim($(this).text()) );
-				break;
-			case 2:
-				//var dat = $(this).text();
-				$('[name=fechaIniMeta]').val( $.trim( $(this).text() ) );//eliminar espacios en blanco
-				break;
-			case 3:
-				$('[name=fechafinMeta]').val( $.trim( $(this).text() ) );
-				break;
-			case 4:
-				$('[name=montoMeta]').val( $.trim($(this).text()) );
-				break;
-			case 5:
-				$('[name=descripcionMeta]').val( $.trim( $(this).text()) );
-				break;
-			case 6:
-				break;
-			case 7:
-				var esta = $.trim( $(this).text() ); //trim elinima espacios en blanco al inicio y final de la cadena
+	$('[name=btnRegistroNuevoMeta]').text("Finalizar");
+	if(modMeta == 0){
+		thisMeta = this;
+		modMeta++;
+	}
+	if($modificarMeta==false){				//OBTENER LOS VALORES DE LA FILA
+		var $fila = $(this).closest("tr"); //Busca la fila más cercana
+		var $celda = $fila.find(".default"); // Busca todas las celdas
+		$campo=0;
+		$.each($celda, function(){// Visits every single <td> element
+			//console.log($(this).text());// Prints out the text within the <td>
+			switch ($campo){
+				case 0:
+					$('#codigoMeta').text( $.trim($(this).text()) );
+					break;
+				case 1:
+					$('[name=nombreMeta]').val( $.trim($(this).text()) );
+					break;
+				case 2:
+					//var dat = $(this).text();
+					$('[name=fechaIniMeta]').val( $.trim( $(this).text() ) );//eliminar espacios en blanco
+					break;
+				case 3:
+					$('[name=fechafinMeta]').val( $.trim( $(this).text() ) );
+					break;
+				case 4:
+					$('[name=montoMeta]').val( $.trim($(this).text()) );
+					break;
+				case 5:
+					$('[name=descripcionMeta]').val( $.trim( $(this).text()) );
+					break;
+				case 6:
+					break;
+				case 7:
+					var esta = $.trim( $(this).text() ); //trim elinima espacios en blanco al inicio y final de la cadena
 
-				if( esta == "Activo" ){ //strcmp($obtenido, "disponible") != 0 
-					$('[name=estadoMeta]').val( 1 );
-				}
-				else if(esta == "Finalizado"){
-					$('[name=estadoMeta]').val( 2 );
-				}
-				else if(esta == "Cancelado"){
-					$('[name=estadoMeta]').val( 3 );
-				}
-				else if(esta == "Inactivo"){ // "Inactivo"
-					$('[name=estadoMeta]').val( 4 );
-				}
-				//$('[name=estadoObj]').val( $(this).text() );
-				break;
+					if( esta == "Activo" ){ //strcmp($obtenido, "disponible") != 0 
+						$('[name=estadoMeta]').val( 1 );
+					}
+					else if(esta == "Finalizado"){
+						$('[name=estadoMeta]').val( 2 );
+					}
+					else if(esta == "Cancelado"){
+						$('[name=estadoMeta]').val( 3 );
+					}
+					else if(esta == "Inactivo"){ // "Inactivo"
+						$('[name=estadoMeta]').val( 4 );
+					}
+					//$('[name=estadoObj]').val( $(this).text() );
+					break;
 
-		}
-		
-		$campo++;
-		
-	})
+			}
+			
+			$campo++;
+			
+		})
 
-	$modificarMeta = true;
-	$primerMeta = true;
-	//$primerObjetivo = true;
-	$('#tituloMeta').html("Modificar Meta");
-	$('#formNewMeta').show("fast");
+		$modificarMeta = true;
+		$primerMeta = true;
+		//$primerObjetivo = true;
+		$('#tituloMeta').html("Modificar Meta");
+		$('#formNewMeta').show("fast");
+	}
+	else{
+		$modificarMeta = false;
+		modMeta = 0;
+		var $fila = $(thisMeta).closest("tr"); //Busca la fila más cercana
+		var $celda = $fila.find(".default"); // Busca todas las celdas
+		$campo=0;
+		$.each($celda, function(){// Visits every single <td> element
+			//console.log($(this).text());// Prints out the text within the <td>
+			switch ($campo){
+				case 0:
+					break;
+				case 1:
+					 //$(this).text('CHARLY');
+					 $(this).text($.cookie('nameMP') );
+					break;
+				case 2:
+					$(this).text($.cookie('dateIniMP') );
+					break;
+				case 3:
+					$(this).text($.cookie('datefinMP') );
+					break;
+				case 4:
+					$(this).text($.cookie('montoMP') );
+					break;
+				case 5:
+					$(this).text($.cookie('descripMP') );
+					break;
+				case 6:
+					break;
+				case 7:
+
+					if( $.cookie('estadoMP') == 1 ){ 
+						$(this).text('Activo');
+					}
+					else if( $.cookie('estadoMP') == 2 ){ 
+						$(this).text('Finalizado');
+					}
+					else if( $.cookie('estadoMP') == 3 ){ 
+						$(this).text('Cancelado');
+					}
+					else if( $.cookie('estadoMP') == 4 ){ 
+						$(this).text('Inactivo');
+					}
+					
+					break;
+
+			}
+			
+			$campo++;
+		})
+	}
 }
 
 
@@ -408,6 +540,7 @@ function guardarMetaModify(){
 	            success: function(RespHTML) {
 	                alert(RespHTML);
 					$('#formNewMeta').hide("fast");//esconde el formulario de meta
+					modifyMeta(); //se llama para refrescar los valores en la tabla una vez se ha hecho la modificación guardado en la BD 
 	            },
 	            error: function() {
 	                alert('Lo sentimos, se ha producido un error.');
@@ -415,64 +548,124 @@ function guardarMetaModify(){
 	        });
 }
 
+var modActi = 0;
+var thisActi;
 
 function modifyActividad(){
-	var $fila = $(this).closest("tr"); //Busca la fila más cercana
-	var $celda = $fila.find(".default"); // Busca todas las celdas
-	$campo=0;
-	$.each($celda, function(){// Visits every single <td> element
-		//console.log($(this).text());// Prints out the text within the <td>
-		switch ($campo){
-			case 0:
-				$('#codigoActi').text( $.trim($(this).text()) );
-				break;
-			case 1:
-				$('[name=nombreActi]').val( $.trim($(this).text()) );
-				break;
-			case 2:
-				//var dat = $(this).text();
-				$('[name=fechaIniActi]').val( $.trim( $(this).text() ) );//eliminar espacios en blanco
-				break;
-			case 3:
-				$('[name=fechafinActi]').val( $.trim( $(this).text() ) );
-				break;
-			case 4:
-				$('[name=montoActi]').val( $.trim($(this).text()) );
-				break;
-			case 5:
-				$('[name=descripcionActi]').val( $.trim( $(this).text()) );
-				break;
-			case 6:
-				break;
-			case 7:
-				var esta = $.trim( $(this).text() ); //trim elinima espacios en blanco al inicio y final de la cadena
+	$('[name=btnRegistroNuevoActi]').text("Finalizar");
+	if(modActi == 0){
+		thisActi = this;
+		modActi++;
+	}
+	if($modificarActividad==false){
+		var $fila = $(this).closest("tr"); //Busca la fila más cercana
+		var $celda = $fila.find(".default"); // Busca todas las celdas
+		$campo=0;
+		$.each($celda, function(){// Visits every single <td> element
+			//console.log($(this).text());// Prints out the text within the <td>
+			switch ($campo){
+				case 0:
+					$('#codigoActi').text( $.trim($(this).text()) );
+					break;
+				case 1:
+					$('[name=nombreActi]').val( $.trim($(this).text()) );
+					break;
+				case 2:
+					//var dat = $(this).text();
+					$('[name=fechaIniActi]').val( $.trim( $(this).text() ) );//eliminar espacios en blanco
+					break;
+				case 3:
+					$('[name=fechafinActi]').val( $.trim( $(this).text() ) );
+					break;
+				case 4:
+					$('[name=montoActi]').val( $.trim($(this).text()) );
+					break;
+				case 5:
+					$('[name=descripcionActi]').val( $.trim( $(this).text()) );
+					break;
+				case 6:
+					break;
+				case 7:
+					var esta = $.trim( $(this).text() ); //trim elinima espacios en blanco al inicio y final de la cadena
 
-				if( esta == "Activo" ){ //strcmp($obtenido, "disponible") != 0 
-					$('[name=estadoActi]').val( 1 );
-				}
-				else if(esta == "Finalizado"){
-					$('[name=estadoActi]').val( 2 );
-				}
-				else if(esta == "Cancelado"){
-					$('[name=estadoActi]').val( 3 );
-				}
-				else if(esta == "Inactivo"){ // "Inactivo"
-					$('[name=estadoActi]').val( 4 );
-				}
-				//$('[name=estadoObj]').val( $(this).text() );
-				break;
+					if( esta == "Activo" ){ //strcmp($obtenido, "disponible") != 0 
+						$('[name=estadoActi]').val( 1 );
+					}
+					else if(esta == "Finalizado"){
+						$('[name=estadoActi]').val( 2 );
+					}
+					else if(esta == "Cancelado"){
+						$('[name=estadoActi]').val( 3 );
+					}
+					else if(esta == "Inactivo"){ // "Inactivo"
+						$('[name=estadoActi]').val( 4 );
+					}
+					//$('[name=estadoObj]').val( $(this).text() );
+					break;
 
-		}
-		
-		$campo++;
-		
-	})
+			}
+			
+			$campo++;
+			
+		})
 
-	$modificarActividad = true;
-	$primerActividad = true;
-	//$primerObjetivo = true;
-	$('#tituloActividad').html("Modificar Actividad");
-	$('#formNewActi').show("fast");	
+		$modificarActividad = true;
+		$primerActividad = true;
+		//$primerObjetivo = true;
+		$('#tituloActividad').html("Modificar Actividad");
+		$('#formNewActi').show("fast");	
+	}
+	else{
+		$modificarActividad = false;
+		modActi = 0;
+		var $fila = $(thisActi).closest("tr"); //Busca la fila más cercana
+		var $celda = $fila.find(".default"); // Busca todas las celdas
+		$campo=0;
+		$.each($celda, function(){// Visits every single <td> element
+			//console.log($(this).text());// Prints out the text within the <td>
+			switch ($campo){
+				case 0:
+					break;
+				case 1:
+					 //$(this).text('CHARLY');
+					 $(this).text($.cookie('nameAP') );
+					break;
+				case 2:
+					$(this).text($.cookie('dateIniAP') );
+					break;
+				case 3:
+					$(this).text($.cookie('datefinAP') );
+					break;
+				case 4:
+					$(this).text($.cookie('montoAP') );
+					break;
+				case 5:
+					$(this).text($.cookie('descriAP') );
+					break;
+				case 6:
+					break;
+				case 7:
+
+					if( $.cookie('estadoAP') == 1 ){ 
+						$(this).text('Activo');
+					}
+					else if( $.cookie('estadoAP') == 2 ){ 
+						$(this).text('Finalizado');
+					}
+					else if( $.cookie('estadoAP') == 3 ){ 
+						$(this).text('Cancelado');
+					}
+					else if( $.cookie('estadoAP') == 4 ){ 
+						$(this).text('Inactivo');
+					}
+					
+					break;
+
+			}
+			
+			$campo++;
+		})
+	}
 }
 
 function guardarActividadModify(){
@@ -491,6 +684,7 @@ function guardarActividadModify(){
     		success: function(RespHTML) {
     			alert(RespHTML);
 					$('#formNewActi').hide("fast");//esconde el formulario de meta
+					modifyActividad();//Refrescar los valores de la tabla
 				},
 				error: function() {
 					alert('Lo sentimos, se ha producido un error.');
@@ -727,7 +921,7 @@ function guardarActividadModify(){
 		datosRegistroProy1[5] = $('[name=estadoProy]').val();
 		datosRegistroProy1[6] = $('[name=descripcionProy]').val();*/
 		if($modifcarProyecto == true){
-			//$modifcarProyecto = false;
+			//$modifcarProyecto = false;//SE HACE FALSE CUANDO SE REFRESCAN  LOS VALORES EN LA TABLA
 			guardarProyectoModify();
 		}
 		else{
@@ -737,6 +931,8 @@ function guardarActividadModify(){
 			$('#nameProy').html( $.cookie('nameP') );
 
 			$("#formNewProy").hide("fast");
+			$("#tituloObjetivo").text('Agregar Objetivo');//Se actualiza por si se ha cambiado  por Modificar Proyecto
+			$('[name=btnRegistroNuevoObj]').attr('value', 'Continuar');//Cambiar el nombre del boton.
 			$('#formNewObj').show("fast");
 			$('#codigoObj').html( $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
 			//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
@@ -768,15 +964,18 @@ function guardarActividadModify(){
 		if($primerObjetivo == false){
 			//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
 			$.cookie('codOP', $.cookie('codP')+".1"  );
+			console.log("primer ojetivo false");
 			
 		}
 		else if($modificarObjetivo == true){
-			$modificarObjetivo = false;
+			//$modificarObjetivo = false; //SE HACE FALSE CUANDO SE REFRESCAN LOS VALORES EN LA TABLA
 			$primerObjetivo = false;
 			guardarObjetivoModify();
+			console.log("modificar objetivo");
 
-		}else{
-    	
+		}
+		if($modificarObjetivo == false){
+    		
 				/*datosRegistroProy1[7] = datosRegistroProy1[0] +".1";
 				datosRegistroProy1[8] = $('[name=nombreObj]').val();
 				datosRegistroProy1[9] = $('[name=fechaIniObj]').val();
@@ -795,6 +994,8 @@ function guardarActividadModify(){
 			console.log( $("#codigoObj").text() );
 
 			$('#formNewObj').hide("fast");//esconde el formulario de objetivo
+			$('#tituloMeta').text("Agregar Meta");
+			$('[name=btnRegistroNuevoMeta]').text("Continuar");
 	        $('#formNewMeta').show("fast");//muestra el formulario de meta
 	        $('#codigoMeta').html( $.cookie('codOP') +".1"  );//codigo meta + .1 de nueva meta
 	        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
@@ -830,10 +1031,12 @@ function guardarActividadModify(){
 			console.log("primer meta");
 		}
 		else if($modificarMeta == true){
-			$modificarMeta = false;
+			//$modificarMeta = false;//sE HACE FALSE CUANDO SE REFRESCAN LOS VALORES EN LA TABLA
 			$primerMeta = false;
 			guardarMetaModify();
-		}else{
+		}
+
+		if($modificarMeta == false){
 
 		
 		
@@ -860,7 +1063,8 @@ function guardarActividadModify(){
 			$('#formNewMeta').hide("fast");//esconde el formulario de objetivo
 
 			
-
+			$("#tituloActividad").text("Agregar Actividad");
+			$('[name=btnRegistroNuevoActi]').text("Continuar");
 	        $('#formNewActi').show("fast");//muestra el formulario de meta
 	        //$('#btnRegistroNuevoActi').text('Terminar');//Cambio del texto del boton
 
@@ -896,12 +1100,13 @@ function guardarActividadModify(){
 			
 		}
 		else if($modificarActividad == true){
-			$modificarActividad = false;
+			//$modificarActividad = false;
 			$primerActividad = false;
 
 			guardarActividadModify();
 		}
-		else{
+		
+		if($modificarActividad == false){
 
 		
 		

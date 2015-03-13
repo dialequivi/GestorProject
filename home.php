@@ -796,6 +796,9 @@
 
         $('#bienvenida').hide("fast");//
         $('#modificarProyecto').hide("fast");
+
+        $('#tituloProyecto').text("Crear Nuevo Proyecto");
+        $('[name=btnRegistroNuevoProy]').attr('value', 'Continuar');//Cambiar el nombre del botón
         $('#formNewProy').show("fast");//id formNewProy - div que contiene el formulario de crear proyecto
         //alert("La cedula es: "+$.cookie('cedulaUser'));
       });
