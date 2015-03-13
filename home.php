@@ -267,7 +267,7 @@
             </tr>
             <tr>
               <TD>Estado: </TD>
-              <TD><select class="form-control" name="estadoProy">
+              <TD><select class="form-control" name="estadoProy" required>
                 <option value=1>Activo</option>
                 <option value=2>Finalizado</option>
 
@@ -275,7 +275,7 @@
             </tr>
             <tr>
               <TD>Descripción: </TD>
-              <TD> <textarea rows="8" cols="40" name="descripcionProy" class="form-control" > </textarea> </TD>
+              <TD> <textarea rows="8" cols="40" name="descripcionProy" class="form-control" required></textarea> </TD>
             </tr>
 
             <TR> <td> <!--<input class="btn btn-lg btn-primary btn-block" type="submit" name="registroNuevoProy" value="Registrar" />-->

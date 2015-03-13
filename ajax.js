@@ -318,74 +318,77 @@ function addObjectFromModify( ){
 	 }
 
    }
-
-
    function primerObjetivo(){
 		//PERIMERO SE DEBEN VERIFICAR LOS CAMPOS
 		if($primerObjetivo == false){
 			//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
 			$.cookie('codOP', $.cookie('codP')+".1"  );
 		}
-
-		$.cookie('dIniOP', $('[name=fechaIniObj]').val());
-	    $.cookie('dfinOP', $('[name=fechafinObj]').val());
-	    $.cookie('montoOP', $('[name=montoObj]').val());
-
-    	if ($.cookie('dIniOP')>$.cookie('dfinOP')){
-			alert("Fecha de Finalización Incorrecta");
-			$('#formNewObj').show("fast");//esconde el formulario de objetivo
-        	$('#formNewMeta').hide("fast");//muestra el formulario de meta
-		}
-		else if($.cookie('montoOP')>$.cookie('montoP')){
-			alert("Monto de Objetivo no puede ser mayor al monto del Proyecto");
-			$('#formNewObj').show("fast");//esconde el formulario de objetivo
-        	$('#formNewMeta').hide("fast");//muestra el formulario de meta
-		}
-		else{
-	    	//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
-	    	$.cookie('nameOP', $('[name=nombreObj]').val());
-	    	$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
+		//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
+   			$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
 	    	$.cookie('datefinOP', $('[name=fechafinObj]').val());
-	    	 //Cookies enviadas para validar fechas del formulario de metas
-	        $('[name=fechaIniMeta]').attr('min', $.cookie('dateIniOP'));
-	        $('[name=fechaIniMeta]').attr('max', $.cookie('datefinOP'));
-	        $('[name=fechafinMeta]').attr('min', $.cookie('dateIniOP'));
-	        $('[name=fechafinMeta]').attr('max', $.cookie('datefinOP'));
-	        //Se cierra el bloque de cookies enviadas al formulario de metas
+		    $.cookie('montoOP', $('[name=montoObj]').val());
+	    	$.cookie('nameOP', $('[name=nombreObj]').val());
 	    	$.cookie('estadoOP', $('[name=estadoObj]').val());
 	    	$.cookie('descripOP', $('[name=descripcionObj]').val());
-				/*datosRegistroProy1[7] = datosRegistroProy1[0] +".1";
-				datosRegistroProy1[8] = $('[name=nombreObj]').val();
-				datosRegistroProy1[9] = $('[name=fechaIniObj]').val();
-				datosRegistroProy1[10] = $('[name=fechafinObj]').val();
-				datosRegistroProy1[11] = $('[name=montoObj]').val();
-				datosRegistroProy1[12] = $('[name=estadoObj]').val();
-				datosRegistroProy1[13] = $('[name=descripcionObj]').val();*/
-				//alert("Listo");
-				//alert("CODIGO: "+datosRegistroProy1[7]+" y FECHA-FIN: "+datosRegistroProy1[10]+" ESTADO: "+datosRegistroProy1[12]);
+	    //Cerrando bloque de capura de datos
 
-			$('#codObjP').html( $.cookie('codOP') );//SE AGREGA AL div el codigo del objetivo
-			
-			$('#nameObjP').html( $.cookie('nameOP') );
+	    //alert($.isNumeric($.cookie('montoOP')));
+	    var montoProyecto=parseInt($.cookie('montoP'));
+	    var montoObjetivo=parseInt($.cookie('montoOP'));
+	    var fechaIObj = Date.parse($.cookie('dateIniOP'));
+	    var fechaFobj = Date.parse($.cookie('datefinOP'));
+	    //Bloque de validaciones para formulario de Objetivos
+		    if (isNaN(fechaIObj)){
+		    	alert("Fecha de Inicio Incorrecta");
+		    	$('#formNewObj').show("fast");
+		    	$('#formNewMeta').hide("fast");
+		    }//valida fecha inicial
+		    else if (isNaN(fechaFobj)){
+		    	alert("Fecha de Finalización Incorrecta");
+		    	$('#formNewObj').show("fast");//esconde el formulario de objetivo
+	        	$('#formNewMeta').hide("fast");//muestra el formulario de meta
+		    }//valida fecha final
+	  		else if (fechaIObj>fechaFobj){
+				alert("Fecha de Finalización Incorrecta");
+				$('#formNewObj').show("fast");//esconde el formulario de objetivo
+	        	$('#formNewMeta').hide("fast");//muestra el formulario de meta
+			}//Si la fecha inicial es mayor a la fecha final arroja la notificación e impide el cambio de formulario
+			else if(montoObjetivo>montoProyecto || montoObjetivo<0){
+				alert("Monto de Objetivo debe ser menor o igual al monto del Proyecto y mayor que cero");
+				$('#formNewObj').show("fast");//esconde el formulario de objetivo
+	        	$('#formNewMeta').hide("fast");//muestra el formulario de meta
+			}//Si el monto del objetivo supera el monto del proyecto arroja la notificación, tambien valida que no sea negativo
+			else{
+		    	 //Cookies enviadas para validar fechas del formulario de metas
+		        $('[name=fechaIniMeta]').attr('min', $.cookie('dateIniOP'));
+		        $('[name=fechaIniMeta]').attr('max', $.cookie('datefinOP'));
+		        $('[name=fechafinMeta]').attr('min', $.cookie('dateIniOP'));
+		        $('[name=fechafinMeta]').attr('max', $.cookie('datefinOP'));
+		        //Se cierra el bloque de cookies enviadas al formulario de metas
 
-			//alert( $("#codigoObj").text() );
-			console.log( $("#codigoObj").text() );
-			$('#formNewObj').hide("fast");//esconde el formulario de objetivo
-	        $('#formNewMeta').show("fast");//muestra el formulario de meta
-	        $('#codigoMeta').html( $.cookie('codOP') +".1"  );//codigo meta + .1 de nueva meta
-	        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
-	          
-	          $('#accordion2').show("fast");
-	          $('#codObj1').html( $.cookie('codOP') );
-	          $('#nameObj1').html( $.cookie('nameOP') );
-	          $('#nameObj2').html( $.cookie('nameOP') );
-	          $('#dateIniObj1').html( $.cookie('dateIniOP') );
-	          $('#dateFinObj1').html( $.cookie('datefinOP') );
-	          $('#montoObj1').html( $.cookie('montoOP') );
-	          $('#estadoObj1').html( $.cookie('estadoOP') );
-	          $('#descripcionObj1').html( $.cookie('descripcionOP') );
-	      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
-	      }
+				$('#codObjP').html( $.cookie('codOP') );//SE AGREGA AL div el codigo del objetivo
+				
+				$('#nameObjP').html( $.cookie('nameOP') );
+
+				//alert( $("#codigoObj").text() );
+				console.log( $("#codigoObj").text() );
+				$('#formNewObj').hide("fast");//esconde el formulario de objetivo
+		        $('#formNewMeta').show("fast");//muestra el formulario de meta
+		        $('#codigoMeta').html( $.cookie('codOP') +".1"  );//codigo meta + .1 de nueva meta
+		        //EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de objetivo AL ACORDEON HOME
+		          
+		          $('#accordion2').show("fast");
+		          $('#codObj1').html( $.cookie('codOP') );
+		          $('#nameObj1').html( $.cookie('nameOP') );
+		          $('#nameObj2').html( $.cookie('nameOP') );
+		          $('#dateIniObj1').html( $.cookie('dateIniOP') );
+		          $('#dateFinObj1').html( $.cookie('datefinOP') );
+		          $('#montoObj1').html( $.cookie('montoOP') );
+		          $('#estadoObj1').html( $.cookie('estadoOP') );
+		          $('#descripcionObj1').html( $.cookie('descripcionOP') );
+		      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+		      }
 	    }
 
 	function primerMeta(){
