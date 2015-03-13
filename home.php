@@ -91,7 +91,7 @@
                   </a></h4>
                 </div>
 
-                <div id="collapse1" class="panel-collapse collapse">
+                <div id="collapse1" class="panel-collapse collapse in">
                   <div class="panel-body">
                     <a href="javascript:void(0);" onclick="SINO('tabla1')">Información de Proyecto</a>
                     <div id="tabla1" style="display: none">
@@ -125,7 +125,7 @@
                                       <p style="display:inline;" id="nameObj2"></p>
                                     </a></h4>
                                   </div>
-                                  <div id="collapseInner2" class="panel-collapse collapse">
+                                  <div id="collapseInner2" class="panel-collapse collapse in">
                                     <div class="panel-body">
                                       <table class="table table-condensed">
                                         <TR>
@@ -156,7 +156,7 @@
                                                 <p style="display:inline;" id="nameMet2"></p>
                                               </a></h4>
                                             </div>
-                                            <div id="collapseInner3" class="panel-collapse collapse">
+                                            <div id="collapseInner3" class="panel-collapse collapse in">
                                               <div class="panel-body">
                                                     <table class="table table-condensed">
                                                       <TR>
@@ -187,7 +187,7 @@
                                                             <p style="display:inline;" id="nameAct2"></p>
                                                           </a></h4>
                                                         </div>
-                                                        <div id="collapseInner4" class="panel-collapse collapse">
+                                                        <div id="collapseInner4" class="panel-collapse collapse in">
                                                           <div class="panel-body">
                                                                 <table class="table table-condensed">
                                                                   <TR>
@@ -263,7 +263,7 @@
             </tr>
             <tr>
               <TD>Monto: </TD>
-              <TD> <input type="number" name="montoProy" class="form-control" min="50000" max="100000" required> </TD>
+              <TD> <input type="number" name="montoProy" min="0" class="form-control" required> </TD>
             </tr>
             <tr>
               <TD>Estado: </TD>
@@ -326,7 +326,7 @@
         </tr>
         <tr>
           <TD>Monto: </TD>
-          <TD> <input type="text" name="montoObj" required> </TD>
+          <TD> <input type="number" name="montoObj" required> </TD>
         </tr>
         <tr>
           <TD>Estado: </TD>
@@ -374,12 +374,11 @@
           <tr>
             <TD>Fecha de finalización: </TD>
             <TD> <input type="date" name="fechafinMeta" step="1" min="" max="">
-            </TD>";
-            ?>
+            </TD>
           </tr>
           <tr>
             <TD>Monto: </TD>
-            <TD> <input type="text" name="montoMeta"> </TD>
+            <TD> <input type="number" name="montoMeta"> </TD>
           </tr>
           <tr>
             <TD>Estado: </TD>
@@ -428,7 +427,7 @@
             </tr>
             <tr>
               <TD>Monto: </TD>
-              <TD> <input type="number" name="montoActi" requared pattern="[0-9]*" title="Ingrese un valor numérico"> </TD>
+              <TD> <input type="number" name="montoActi"> </TD>
             </tr>
             <tr>
             <TD>Estado: </TD>
