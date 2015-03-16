@@ -81,23 +81,17 @@
         </p>-->
       </div>
 
-
-
-      <div class="panel-group" id="infoCrearProy" style="display:none;">
+<div class="jumbotron" id="infoCrearProy" style="display:none;">
         <div class="container">
               <div class="panel panel-primary">
                 <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
-                      <p style="display:inline;">Proyecto:</p>
-                      <p style="display:inline;" id="nameProy2"></p>
-
-                    </a>
-                    <input type="button"  class="btn btn-default" name="btnAddOb" id="btnAddOb" value="New Objetivo" />
-                  </h4>
+                  <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+                    <p style="display:inline;">Proyecto:</p>
+                    <p style="display:inline;" id="nameProy2"></p>
+                  </a></h4>
                 </div>
 
-                <div id="collapse1" class="panel-collapse collapse">
+                <div id="collapse1" class="panel-collapse collapse in">
                   <div class="panel-body">
                     <a href="javascript:void(0);" onclick="SINO('tabla1')">Información de Proyecto</a>
                     <div id="tabla1" style="display: none">
@@ -123,7 +117,7 @@
                       </table>
                     </div>
                       <!-- Objetivos -->
-                            <div class="panel-group" id="accordion2" >
+                            <div class="panel-group" id="accordion2" style="display:none;">
                                 <div class="panel panel-success">
                                   <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInner2">
@@ -131,7 +125,7 @@
                                       <p style="display:inline;" id="nameObj2"></p>
                                     </a></h4>
                                   </div>
-                                  <div id="collapseInner2" class="panel-collapse collapse">
+                                  <div id="collapseInner2" class="panel-collapse collapse in">
                                     <div class="panel-body">
                                       <table class="table table-condensed">
                                         <TR>
@@ -154,7 +148,7 @@
                                         </TR>
                                       </table>
                                       <!-- Metas -->
-                                      <div class="panel-group" id="accordion3" >
+                                      <div class="panel-group" id="accordion3" style="display:none;">
                                           <div class="panel panel-danger">
                                             <div class="panel-heading">
                                               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseInner3">
@@ -162,7 +156,7 @@
                                                 <p style="display:inline;" id="nameMet2"></p>
                                               </a></h4>
                                             </div>
-                                            <div id="collapseInner3" class="panel-collapse collapse">
+                                            <div id="collapseInner3" class="panel-collapse collapse in">
                                               <div class="panel-body">
                                                     <table class="table table-condensed">
                                                       <TR>
@@ -185,15 +179,15 @@
                                                       </TR>
                                                     </table>
                                                   <!-- ACTIVIDADES-->
-                                                    <div class="panel-group" id="accordion4" style="display:block;" >
+                                                    <div class="panel-group" id="accordion4" style="display:none;">
                                                       <div class="panel panel-info">
                                                         <div class="panel-heading">
-                                                          <h4 class="panel-title"><a id="desplegar" data-toggle="collapse" data-parent="#accordion4" href="#collapseInner4">
+                                                          <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion4" href="#collapseInner4">
                                                             <p style="display:inline;">Actividad:</p>
                                                             <p style="display:inline;" id="nameAct2"></p>
                                                           </a></h4>
                                                         </div>
-                                                        <div id="collapseInner4" class="panel-collapse collapse">
+                                                        <div id="collapseInner4" class="panel-collapse collapse in">
                                                           <div class="panel-body">
                                                                 <table class="table table-condensed">
                                                                   <TR>
@@ -234,27 +228,6 @@
                 </div>
               </div>
             </div>
-        <table border=0 align=center style="display:none;">
-          <tr id="filaObje">
-            <td><p id="codProy" align="center"> </p></td>
-            <td><p id="nameProy" align="center"> </p></td>
-          </tr>
-          <tr id="filaObj">
-            <td><p id="codObjP" align="center"> </p></td>
-            <td><p id="nameObjP" align="center"> </p></td>
-            <td><p> <a class="btn btn-default" name="btnAddObj" id="btnAddObj" role="button" style="display:none;">Agregar Objetivo</a> </p></td>
-          </tr>
-          <tr id="filaMeta">
-            <td><p id="codMetaP" align="center"> </p></td>
-            <td><p id="nameMetaP" align="center"> </p></td>
-            <td><p> <a class="btn btn-default" name="btnAddMeta" id="btnAddMeta" role="button" style="display:none;">Agregar Meta</a> </p></td>
-          </tr>
-          <tr id="filaActi">
-            <td><p id="codActP" align="center"> </p></td>
-            <td><p id="nameActP" align="center"> </p></td>
-            <td><p> <a class="btn btn-default" name="btnAddActi" id="btnAddActi" role="button" style="display:none;">Agregar Actividad</a> </p></td>
-          </tr>
-        </table>
       </div>
 
 
@@ -280,21 +253,21 @@
             <tr>
               <TD>Fecha de inicio: </TD>
               <TD> <!--<input type="text" name="fechaIniProy"> -->
-                <input type="date" name="fechaIniProy" step="1" min="1900-01-01" max="2099-12-31" class="form-control"  >
+                <input type="date" name="fechaIniProy" step="1" min="1900-01-01" max="2099-12-31" class="form-control"  required>
               </TD>
             </tr>
             <tr>
               <TD>Fecha de finalización: </TD>
-              <TD> <input type="date" name="fechafinProy" step="1" min="1900-01-01" max="2099-12-31" class="form-control"  >
+              <TD> <input type="date" name="fechafinProy" step="1" min="1900-01-01" max="2099-12-31" class="form-control"  required>
               </TD>
             </tr>
             <tr>
               <TD>Monto: </TD>
-              <TD> <input type="number" name="montoProy" class="form-control" > </TD>
+              <TD> <input type="number" name="montoProy" min="0" class="form-control" required> </TD>
             </tr>
             <tr>
               <TD>Estado: </TD>
-              <TD><select class="form-control" name="estadoProy">
+              <TD><select class="form-control" name="estadoProy" required>
                 <option value=1>Activo</option>
                 <option value=2>Finalizado</option>
                 <option value=3>Cancelado</option>
@@ -304,7 +277,7 @@
             </tr>
             <tr>
               <TD>Descripción: </TD>
-              <TD> <textarea rows="8" cols="40" name="descripcionProy" class="form-control" > </textarea> </TD>
+              <TD> <textarea rows="8" cols="40" name="descripcionProy" class="form-control" required></textarea> </TD>
             </tr>
 
             <TR> <td> <!--<input class="btn btn-lg btn-primary btn-block" type="submit" name="registroNuevoProy" value="Registrar" />-->
@@ -342,18 +315,20 @@
         </tr>
         <tr>
           <TD>Fecha de inicio: </TD>
-          <TD> <!--<input type="text" name="fechaIniProy"> -->
-            <input type="date" name="fechaIniObj" step="1" min="1900-01-01" max="2099-12-31" required>
+          <TD> 
+            <input type="date" name="fechaIniObj" step="1" min="" max="" required>
           </TD>
+          
         </tr>
         <tr>
           <TD>Fecha de finalización: </TD>
-          <TD> <input type="date" name="fechafinObj" step="1" min="1900-01-01" max="2099-12-31" required>
+          <TD> <input type="date" name="fechafinObj" step="1" min="" max="" required>
           </TD>
+          
         </tr>
         <tr>
           <TD>Monto: </TD>
-          <TD> <input type="text" name="montoObj" required> </TD>
+          <TD> <input type="number" name="montoObj" required> </TD>
         </tr>
         <tr>
           <TD>Estado: </TD>
@@ -367,7 +342,7 @@
         </tr>
         <tr>
           <TD>Descripción: </TD>
-          <TD> <textarea rows="8" cols="40" name="descripcionObj" required> </textarea> </TD>
+          <TD> <textarea rows="8" cols="40" name="descripcionObj"> </textarea> </TD>
         </tr>
         
         <TR> <TD> <input type="button" class="btn btn-lg btn-primary btn-block"  name="btnRegistroNuevoObj" value="Continuar" /> </TD>
@@ -396,18 +371,18 @@
           </tr>
           <tr>
             <TD>Fecha de inicio: </TD>
-            <TD> <!--<input type="text" name="fechaIniProy"> -->
-              <input type="date" name="fechaIniMeta" step="1" min="1900-01-01" max="2099-12-31">
+            <TD>
+              <input type="date" name="fechaIniMeta" step="1" min="" max="">
             </TD>
           </tr>
           <tr>
             <TD>Fecha de finalización: </TD>
-            <TD> <input type="date" name="fechafinMeta" step="1" min="1900-01-01" max="2099-12-31">
+            <TD> <input type="date" name="fechafinMeta" step="1" min="" max="">
             </TD>
           </tr>
           <tr>
             <TD>Monto: </TD>
-            <TD> <input type="text" name="montoMeta"> </TD>
+            <TD> <input type="number" name="montoMeta"> </TD>
           </tr>
           <tr>
             <TD>Estado: </TD>
@@ -448,17 +423,17 @@
             <tr>
               <TD>Fecha de inicio: </TD>
               <TD> <!--<input type="text" name="fechaIniProy"> -->
-                <input type="date" name="fechaIniActi" step="1" min="1900-01-01" max="2099-12-31">
+                <input type="date" name="fechaIniActi" step="1" min="" max="">
               </TD>
             </tr>
             <tr>
               <TD>Fecha de finalización: </TD>
-              <TD> <input type="date" name="fechafinActi" step="1" min="1900-01-01" max="2099-12-31">
+              <TD> <input type="date" name="fechafinActi" step="1" min="" max="">
               </TD>
             </tr>
             <tr>
               <TD>Monto: </TD>
-              <TD> <input type="number" name="montoActi" requared pattern="[0-9]*" title="Ingrese un valor numérico"> </TD>
+              <TD> <input type="number" name="montoActi"> </TD>
             </tr>
             <tr>
             <TD>Estado: </TD>
@@ -811,9 +786,8 @@
 
       $("#esconda").click(function(){
         $('#formNewProy').hide("fast");
-
-
         var bie = "wellcome";
+
         $('#bienvenida').attr('id', bie);
 
         $('#wellcome').hide('fast');
