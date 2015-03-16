@@ -1240,7 +1240,7 @@ function primerActi(){
 				});
 			}
 			else if($primerObjetivo == true && $primerMeta == false && $primerActividad == false){//Para registrar un nuevo objetivo
-				$primerObjetivo == false;
+				$primerObjetivo = false;
 				$.ajax({
 					type: "POST",
 					url: 'php/registrarObjetivo.php',
