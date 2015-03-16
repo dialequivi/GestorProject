@@ -302,7 +302,7 @@
 
    <!--FORMULARIO DE REGISTRO DE OBJETIVO-->
    <div class="jumbotron" id="formNewObj" style="display:none;">
-    <form class="form-cproject" id="registrarObj">
+    <form class="form-cproject" id="registrarObj" method="POST">
       <h2 id="tituloObjetivo" class="form-cproject-heading" align="center">Agregar Objetivo</h2>
       <table border=0 align=CENTER >
         <TR>

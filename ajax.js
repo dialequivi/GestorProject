@@ -907,54 +907,24 @@ function guardarActividadModify(){
 
 	function datosProy1(){
 		$.cookie('dIniP', $('[name=fechaIniProy]').val() );
-	    $.cookie('dfinP', $('[name=fechafinProy]').val() );
+		$.cookie('dfinP', $('[name=fechafinProy]').val() );
 
 		if ($.cookie('dIniP')>$.cookie('dfinP')){
-        	alert("Fecha de Finalización Incorrecta");
-        	$("#formNewProy").show("fast");
+			alert("Fecha de Finalización Incorrecta");
+			$("#formNewProy").show("fast");
 			$('#formNewObj').fast("fast");
-        }
-        else{
-		//CAPTURANDO LOS DATOS DEL FORMULARIO DEL NUEVO PROYECTO
-//<<<<<<< HEAD
-		$.cookie('codP', $('[name=codigoProy]').val() );
-        $.cookie('nameP', $('[name=nombreProy]').val() );
-        $.cookie('dateIniP', $('[name=fechaIniProy]').val() );
-        $.cookie('datefinP', $('[name=fechafinProy]').val() );
-        $.cookie('montoP', $('[name=montoProy]').val() );
-        $.cookie('estadoP', $('[name=estadoProy]').val() );
-        $.cookie('descripcionP', $('[name=descripcionProy]').val() );
-
-        //datosRegistroProy1[0] = $('[name=codigoProy]').val();
-		/*datosRegistroProy1[0] = $('[name=codigoProy]').val();
-		datosRegistroProy1[1] = $('[name=nombreProy]').val();
-		datosRegistroProy1[2] = $('[name=fechaIniProy]').val();
-		datosRegistroProy1[3] = $('[name=fechafinProy]').val();
-		datosRegistroProy1[4] = $('[name=montoProy]').val();
-		datosRegistroProy1[5] = $('[name=estadoProy]').val();
-		datosRegistroProy1[6] = $('[name=descripcionProy]').val();*/
-		if($modifcarProyecto == true){
-			//$modifcarProyecto = false;//SE HACE FALSE CUANDO SE REFRESCAN  LOS VALORES EN LA TABLA
-			guardarProyectoModify();
 		}
 		else{
-	        //alert("nombre: "+datosRegistroProy1[1]+" y FECHA-FIN: "+datosRegistroProy1[3]+" ESTADO: "+datosRegistroProy1[5]);
-	        $('#infoCrearProy').show("fast");
-			$('#codProy').html( $.cookie('codP') );//SE AGREGA AL div #infoCrearProy el codigo del proyecto
-			$('#nameProy').html( $.cookie('nameP') );
+			//CAPTURANDO LOS DATOS DEL FORMULARIO DEL NUEVO PROYECTO
+			//<<<<<<< HEAD
+			$.cookie('codP', $('[name=codigoProy]').val() );
+			$.cookie('nameP', $('[name=nombreProy]').val() );
+			$.cookie('dateIniP', $('[name=fechaIniProy]').val() );
+			$.cookie('datefinP', $('[name=fechafinProy]').val() );
+			$.cookie('montoP', $('[name=montoProy]').val() );
+			$.cookie('estadoP', $('[name=estadoProy]').val() );
+			$.cookie('descripcionP', $('[name=descripcionProy]').val() );
 
-			$("#formNewProy").hide("fast");
-			$("#tituloObjetivo").text('Agregar Objetivo');//Se actualiza por si se ha cambiado  por Modificar Proyecto
-			$('[name=btnRegistroNuevoObj]').attr('value', 'Continuar');//Cambiar el nombre del boton.
-//=======
-
-	        //Cookies enviadas para validar fechas del formulario de objetivos
-	        $('[name=fechaIniObj]').attr('min', $.cookie('dateIniP'));
-	        $('[name=fechaIniObj]').attr('max', $.cookie('datefinP'));
-	        $('[name=fechafinObj]').attr('min', $.cookie('dateIniP'));
-	        $('[name=fechafinObj]').attr('max', $.cookie('datefinP'));
-	    	
-	        //Se cierra el bloque de cookies enviadas al formulario de objetivos
 	        //datosRegistroProy1[0] = $('[name=codigoProy]').val();
 			/*datosRegistroProy1[0] = $('[name=codigoProy]').val();
 			datosRegistroProy1[1] = $('[name=nombreProy]').val();
@@ -963,33 +933,65 @@ function guardarActividadModify(){
 			datosRegistroProy1[4] = $('[name=montoProy]').val();
 			datosRegistroProy1[5] = $('[name=estadoProy]').val();
 			datosRegistroProy1[6] = $('[name=descripcionProy]').val();*/
+			if($modifcarProyecto == true){
+				//$modifcarProyecto = false;//SE HACE FALSE CUANDO SE REFRESCAN  LOS VALORES EN LA TABLA
+				guardarProyectoModify();
+			}
+			else{
+		        //alert("nombre: "+datosRegistroProy1[1]+" y FECHA-FIN: "+datosRegistroProy1[3]+" ESTADO: "+datosRegistroProy1[5]);
+		        $('#infoCrearProy').show("fast");
+				$('#codProy').html( $.cookie('codP') );//SE AGREGA AL div #infoCrearProy el codigo del proyecto
+				$('#nameProy').html( $.cookie('nameP') );
 
-	        //alert("nombre: "+datosRegistroProy1[1]+" y FECHA-FIN: "+datosRegistroProy1[3]+" ESTADO: "+datosRegistroProy1[5]);
-	        
-	        $('#codProy').html( $.cookie('codP') );//SE AGREGA AL div #infoCrearProy el codigo del proyecto
-			$('#nameProy').html( $.cookie('nameP') );
-	        $('#infoCrearProy').show("fast");
-			$("#formNewProy").hide("fast");
-//>>>>>>> github_gproject/validaciones_incompletas
-			$('#formNewObj').show("fast");
-			$('#codigoObj').html( $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
-			//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
-	          $('#codProy1').html( $.cookie('codP') );
-	          $('#nameProy1').html( $.cookie('nameP') );
-	          $('#nameProy2').html( $.cookie('nameP') );
-	          $('#dateIniProy1').html( $.cookie('dateIniP') );
-	          $('#dateFinProy1').html( $.cookie('datefinP') );
-	          $('#montoProy1').html( $.cookie('montoP') );
-	          $('#estadoProy1').html( $.cookie('estadoP') );
-	          $('#descripcionProy1').html( $.cookie('descripcionP') );
-	      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
-//<<<<<<< HEAD
-//      }
-//=======
-	 }
+				$("#formNewProy").hide("fast");
+				$("#tituloObjetivo").text('Agregar Objetivo');//Se actualiza por si se ha cambiado  por Modificar Proyecto
+				$('[name=btnRegistroNuevoObj]').attr('value', 'Continuar');//Cambiar el nombre del boton.
+	//=======
+
+		        //Cookies enviadas para validar fechas del formulario de objetivos
+		        $('[name=fechaIniObj]').attr('min', $.cookie('dateIniP'));
+		        $('[name=fechaIniObj]').attr('max', $.cookie('datefinP'));
+		        $('[name=fechafinObj]').attr('min', $.cookie('dateIniP'));
+		        $('[name=fechafinObj]').attr('max', $.cookie('datefinP'));
+
+		        //Se cierra el bloque de cookies enviadas al formulario de objetivos
+		        //datosRegistroProy1[0] = $('[name=codigoProy]').val();
+				/*datosRegistroProy1[0] = $('[name=codigoProy]').val();
+				datosRegistroProy1[1] = $('[name=nombreProy]').val();
+				datosRegistroProy1[2] = $('[name=fechaIniProy]').val();
+				datosRegistroProy1[3] = $('[name=fechafinProy]').val();
+				datosRegistroProy1[4] = $('[name=montoProy]').val();
+				datosRegistroProy1[5] = $('[name=estadoProy]').val();
+				datosRegistroProy1[6] = $('[name=descripcionProy]').val();*/
+
+		        //alert("nombre: "+datosRegistroProy1[1]+" y FECHA-FIN: "+datosRegistroProy1[3]+" ESTADO: "+datosRegistroProy1[5]);
+		        
+		        $('#codProy').html( $.cookie('codP') );//SE AGREGA AL div #infoCrearProy el codigo del proyecto
+		        $('#nameProy').html( $.cookie('nameP') );
+		        $('#infoCrearProy').show("fast");
+		        $("#formNewProy").hide("fast");
+				//>>>>>>> github_gproject/validaciones_incompletas
+				$('#formNewObj').show("fast");
+				$('#codigoObj').html( $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
+				//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
+				$('#codProy1').html( $.cookie('codP') );
+				$('#nameProy1').html( $.cookie('nameP') );
+				$('#nameProy2').html( $.cookie('nameP') );
+				$('#dateIniProy1').html( $.cookie('dateIniP') );
+				$('#dateFinProy1').html( $.cookie('datefinP') );
+				$('#montoProy1').html( $.cookie('montoP') );
+				$('#estadoProy1').html( $.cookie('estadoP') );
+				$('#descripcionProy1').html( $.cookie('descripcionP') );
+		      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+	//<<<<<<< HEAD
+	//      }
+	//=======
+			}
 //>>>>>>> github_gproject/validaciones_incompletas
 
-   }
+		}
+	}
+
    function primerObjetivo(){
 		//PERIMERO SE DEBEN VERIFICAR LOS CAMPOS
 
@@ -1342,5 +1344,5 @@ function primerActi(){
 		}
 	}
 }
-}
+
 });
