@@ -233,173 +233,165 @@
 
 
       <!--FORMULARIO DE REGISTRO DE NUEVO PROYECTO-->
-
       <div class="jumbotron" id="formNewProy" style="display:none;">
-
-        <!--<form class="form-cproject" action="php/registrarProyecto.php" method="post" enctype="multipart/form-data" name="datos" id="registrarProy">-->
-
         <form class="form-cproject" id="registrarProy" method="POST">
-          <h2 id="tituloProyecto" class="form-cproject-heading" align="center"> Crear un nuevo proyecto</h2>
+          <h2 class="form-cproject-heading" align="center"> Crear un nuevo proyecto</h2>
           <table border=0 align=CENTER >
+
             <TR>
               <TD>Código: </TD>
               <TD> <input class="form-control" type="text" name="codigoProy" id="codigoProy" required> </TD>
             </TR>
+            
             <tr>
               <TD>Nombre: </TD>
               <TD> <input class="form-control" type="text" name="nombreProy" required > 
               </TD>
             </tr>
+            
             <tr>
               <TD>Fecha de inicio: </TD>
-              <TD> <!--<input type="text" name="fechaIniProy"> -->
+              <TD>
                 <input type="date" name="fechaIniProy" step="1" min="1900-01-01" max="2099-12-31" class="form-control"  required>
               </TD>
             </tr>
+            
             <tr>
               <TD>Fecha de finalización: </TD>
               <TD> <input type="date" name="fechafinProy" step="1" min="1900-01-01" max="2099-12-31" class="form-control"  required>
               </TD>
             </tr>
+            
             <tr>
               <TD>Monto: </TD>
               <TD> <input type="number" name="montoProy" min="0" class="form-control" required> </TD>
             </tr>
+
             <tr>
               <TD>Estado: </TD>
-              <TD><select class="form-control" name="estadoProy" required>
-                <option value=1>Activo</option>
-                <option value=2>Finalizado</option>
-                <option value=3>Cancelado</option>
-                <option value=4>Inactivo</option> 
-
-              </select> </TD>
+              <TD>
+                <select class="form-control" name="estadoProy" required>
+                  <option value=1>Activo</option>
+                  <option value=2>Finalizado</option>
+                  <option value=3>Cancelado</option>
+                  <option value=4>Inactivo</option> 
+                </select> 
+              </TD>
             </tr>
+
             <tr>
               <TD>Descripción: </TD>
               <TD> <textarea rows="8" cols="40" name="descripcionProy" class="form-control" required></textarea> </TD>
             </tr>
 
-            <TR> <td> <!--<input class="btn btn-lg btn-primary btn-block" type="submit" name="registroNuevoProy" value="Registrar" />-->
-             <input type="submit" class="btn btn-lg btn-primary btn-block" name="btnRegistroNuevoProy" value="Continuar"/> 
-           </td>
+            <TR> 
+              <td> <!--<input class="btn btn-lg btn-primary btn-block" type="submit" name="registroNuevoProy" value="Registrar" />-->
+                <input type="submit" class="btn btn-lg btn-primary btn-block" name="btnRegistroNuevoProy" value="Continuar"/> 
+              </td>
+            </TR>
 
-
-         </TR>
-
-       </table>
-     </form> 
-     <!--muestra el mensaje devuelto por registrarProyecto.php-->         
-     <!--<div id="msj"></div>-->
-   </div>
-
-   <div class="jumbotron" id="formNewProy" style="display:none;">
-     <h3> Respuesta: </h3>
-     <div id="Mensajes">
-     </div>
-   </div>
-
+          </table>
+        </form> 
+      </div>
 
    <!--FORMULARIO DE REGISTRO DE OBJETIVO-->
    <div class="jumbotron" id="formNewObj" style="display:none;">
     <form class="form-cproject" id="registrarObj" method="POST">
-      <h2 id="tituloObjetivo" class="form-cproject-heading" align="center">Agregar Objetivo</h2>
+      <h2 class="form-cproject-heading" align="center">Agregar Objetivo</h2>
       <table border=0 align=CENTER >
         <TR>
           <TD>Código: </TD>
-          <TD> <p id="codigoObj" name="codigoObj"> </p> </TD>
+          <TD> <input class="form-control" type="text" name="codigoObj" id="codigoObj" placeholder="" disabled> </TD>
+          <!--<TD> <p id="codigoObj" name="codigoObj"> </p> </TD>-->
         </TR>
         <tr>
           <TD>Nombre: </TD>
-          <TD> <input type="text" name="nombreObj" required> </TD>
+          <TD> <input type="text" name="nombreObj" class="form-control" required> </TD>
         </tr>
         <tr>
           <TD>Fecha de inicio: </TD>
           <TD> 
-            <input type="date" name="fechaIniObj" step="1" min="" max="" required>
+            <input type="date" name="fechaIniObj" step="1" min="" max="" class="form-control" required>
           </TD>
           
         </tr>
         <tr>
           <TD>Fecha de finalización: </TD>
-          <TD> <input type="date" name="fechafinObj" step="1" min="" max="" required>
+          <TD> <input type="date" name="fechafinObj" step="1" min="" max="" class="form-control" required>
           </TD>
           
         </tr>
         <tr>
           <TD>Monto: </TD>
-          <TD> <input type="number" name="montoObj" required> </TD>
+          <TD> <input type="number" name="montoObj" class="form-control" required> </TD>
         </tr>
         <tr>
           <TD>Estado: </TD>
-          <TD> <select name="estadoObj" >
-            <option value=1>Activo</option>
-            <option value=2>Finalizado</option>
-            <option value=3>Cancelado</option>
-            <option value=4>Inactivo</option>
-
+          <TD> <select class="form-control" name="estadoObj" required>
+                <option value=1>Activo</option>
+                <option value=2>Finalizado</option>
+                <option value=3>Cancelado</option>
+                <option value=4>Inactivo</option> 
           </select> </TD>
         </tr>
         <tr>
           <TD>Descripción: </TD>
-          <TD> <textarea rows="8" cols="40" name="descripcionObj"> </textarea> </TD>
+          <TD> <textarea rows="8" cols="40" name="descripcionObj" class="form-control" required></textarea> </TD>
         </tr>
         
-        <TR> <TD> <input type="button" class="btn btn-lg btn-primary btn-block"  name="btnRegistroNuevoObj" value="Continuar" /> </TD>
+        <TR> <TD> <input type="submit" class="btn btn-lg btn-primary btn-block"  name="btnRegistroNuevoObj" value="Continuar" /> </TD>
           <!--<TD> <input type="button" class="btn btn-lg btn-primary btn-block" id="agregarMeta" value="Agregar Meta"
             style="display:none;" /> </TD>-->
           </TR>  
         </table>
       </form>
-
     </div>
-
-
 
     <!--FORMULARIO DE REGISTRO DE META-->
     <div class="jumbotron" id="formNewMeta" style="display:none;">
-      <form class="form-cproject" id="registrarMeta">
-        <h2 id="tituloMeta" class="form-cproject-heading" align="center">Agregar Meta</h2>
+      <form class="form-cproject" id="registrarMeta" method="POST">
+        <h2 class="form-cproject-heading" align="center">Agregar Meta</h2>
         <table border=0 align=CENTER >
           <TR>
             <TD>Código: </TD>
-            <TD> <p name="codigoMeta" id="codigoMeta"> </p></TD>
+            <!--<TD> <p name="codigoMeta" id="codigoMeta"> </p></TD>-->
+            <TD> <input class="form-control" type="text" name="codigoMeta" id="codigoMeta" placeholder="" disabled> </TD>
           </TR>
           <tr>
             <TD>Nombre: </TD>
-            <TD> <input type="text" name="nombreMeta"> </TD>
+            <TD> <input class="form-control" type="text" name="nombreMeta" required> </TD>
           </tr>
           <tr>
             <TD>Fecha de inicio: </TD>
             <TD>
-              <input type="date" name="fechaIniMeta" step="1" min="" max="">
+              <input class="form-control" type="date" name="fechaIniMeta" step="1" min="" max="" required>
             </TD>
           </tr>
           <tr>
             <TD>Fecha de finalización: </TD>
-            <TD> <input type="date" name="fechafinMeta" step="1" min="" max="">
+            <TD> <input class="form-control" type="date" name="fechafinMeta" step="1" min="" max="" required>
             </TD>
           </tr>
           <tr>
             <TD>Monto: </TD>
-            <TD> <input type="number" name="montoMeta"> </TD>
+            <TD> <input class="form-control" type="number" name="montoMeta" required> </TD>
           </tr>
           <tr>
             <TD>Estado: </TD>
-            <TD> <select name="estadoMeta" >
-              <option value=1>Activo</option>
-              <option value=2>Finalizado</option>
-              <option value=3>Cancelado</option>
+            <TD> <select class="form-control" name="estadoMeta" required>
+                <option value=1>Activo</option>
+                <option value=2>Finalizado</option>
+                <option value=3>Cancelado</option>
                 <option value=4>Inactivo</option> 
 
             </select> </TD>
           </tr>
           <tr>
             <TD>Descripción: </TD>
-            <TD> <textarea rows="8" cols="40" name="descripcionMeta"> </textarea> </TD>
+            <TD> <textarea class="form-control" rows="8" cols="40" name="descripcionMeta" required></textarea> </TD>
           </tr>
-          
-          <TR> <TD> <input type="button" class="btn btn-lg btn-primary btn-block" name="btnRegistroNuevoMeta" value="Continuar" /> </TD>
+           
+          <TR> <TD> <input type="submit" class="btn btn-lg btn-primary btn-block" name="btnRegistroNuevoMeta" value="Continuar" /> </TD>
 <!--            <TD> <input type="button" class="btn btn-lg btn-primary btn-block" id="agregarAct" value="Agregar Actividad"
               style="display:none;" /> </TD>-->
             </TR> 
@@ -409,50 +401,50 @@
 
       <!--FORMULARIO DE REGISTRO DE ACTIVIDAD-->
       <div class="jumbotron" id="formNewActi" style="display:none;">
-        <form class="form-cproject" id="registrarActividad">
-          <h2 id="tituloActividad" class="form-cproject-heading" align="center">Agregar Actividad</h2>
+        <form class="form-cproject" id="registrarActividad"  method="POST">
+          <h2 class="form-cproject-heading" align="center">Agregar Actividad</h2>
           <table border=0 align=CENTER >
             <TR>
               <TD>Código: </TD>
-              <TD> <p id="codigoActi" name="codigoActi"></p> </TD>
+              <TD> <input class="form-control" type="text" name="codigoActi" id="codigoActi" placeholder="" disabled> </TD>
+              <!--<TD> <p id="codigoActi" name="codigoActi"></p> </TD>-->
             </TR>
             <tr>
               <TD>Nombre: </TD>
-              <TD> <input type="text" name="nombreActi"> </TD>
+              <TD> <input class="form-control" type="text" name="nombreActi" required> </TD>
             </tr>
             <tr>
               <TD>Fecha de inicio: </TD>
               <TD> <!--<input type="text" name="fechaIniProy"> -->
-                <input type="date" name="fechaIniActi" step="1" min="" max="">
+                <input class="form-control" type="date" name="fechaIniActi" step="1" min="" max="" required>
               </TD>
             </tr>
             <tr>
               <TD>Fecha de finalización: </TD>
-              <TD> <input type="date" name="fechafinActi" step="1" min="" max="">
+              <TD> <input class="form-control" type="date" name="fechafinActi" step="1" min="" max="" required>
               </TD>
             </tr>
             <tr>
               <TD>Monto: </TD>
-              <TD> <input type="number" name="montoActi"> </TD>
+              <TD> <input class="form-control" type="number" name="montoActi" required> </TD>
             </tr>
             <tr>
             <TD>Estado: </TD>
-            <TD> <select name="estadoActi" id="punto" >
-              <option value=1>Activo</option>
-              <option value=2>Finalizado</option>
-              <option value=3>Cancelado</option>
+            <TD> <select class="form-control" name="estadoActi" required>
+                <option value=1>Activo</option>
+                <option value=2>Finalizado</option>
+                <option value=3>Cancelado</option>
                 <option value=4>Inactivo</option> 
 
             </select> </TD>
           </tr>
             <tr>
               <TD>Descripción: </TD>
-              <TD> <textarea rows="8" cols="40" name="descripcionActi"> </textarea> </TD>
+              <TD> <textarea class="form-control" rows="8" cols="40" name="descripcionActi" required></textarea> </TD>
             </tr>
            
           
-
-          <TR> <TD> <input type="button" class="btn btn-lg btn-primary btn-block" name="btnRegistroNuevoActi" value="Registrar Proyecto"  /> </TD></TR>  
+          <TR> <TD> <input type="submit" class="btn btn-lg btn-primary btn-block" name="btnRegistroNuevoActi" value="Registrar Proyecto"  /> </TD></TR>  
         </table>
       </form>
     </div>
@@ -486,7 +478,7 @@
 
         <div class=\"panel-group\" id=\"accordion1\">
           <?php
-          $id=0;
+          $id=2;
           while($row = mysql_fetch_array ($result))
           {
             echo "
@@ -619,7 +611,7 @@
                                       
                                       
                                       
-                                    </div> 
+                                    </div>  
                                   </div>
                                 </div>
                                 <div id=\"collapseInner$id$id2$id3\" class=\"panel-collapse collapse\">
