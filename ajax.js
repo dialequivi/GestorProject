@@ -716,7 +716,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
                 $.cookie('codOP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
 
-                $('#codigoObj').html( RespHTML );      
+                $('#codigoObj').attr('value', RespHTML );      
 
                 //$('#formNewProy').hide("fast");
 
@@ -943,7 +943,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
 			$('#formNewObj').show("fast");
 			$('[name=codigoObj]').attr('placeholder', $.cookie('codP')+".1");
-			$('#codigoObj').html( $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
+			$('#codigoObj').attr('value', $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
 			$('[name=btnRegistroNuevoObj]').attr('value', 'Continuar');//Cambiar el nombre del boton.
 
 			//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
