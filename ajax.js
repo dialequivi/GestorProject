@@ -940,50 +940,90 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
         var fechaIpro = Date.parse($.cookie('dateIniP'));
 	    var fechaFpro = Date.parse($.cookie('datefinP'));
 	    var estProy= $.cookie('estadoP');
+	    if(estProy=="2"){
+	    	alertify.confirm("<p>El Estado es Finalizado.<br><br> Solo se podrá crear Objetivos, Metas, Actividades en Estado Finalizado</p>", function (e) {
+				if (e) {
+					alertify.success("Has pulsado '" + alertify.labels.ok + "'");
+					continuar();
+				} 
+				else { 
+					alertify.error("Has pulsado '" + alertify.labels.cancel + "'");
+					$("#formNewProy").show("fast");
+					$('#formNewObj').fast("fast");
+				}
+			}); 
+			return false
+	    }
+	    else{
+	    	continuar();
+	    }
+	    function continuar(){
+	        if($modifcarProyecto == true){
+				//$modifcarProyecto = false;//SE HACE FALSE CUANDO SE REFRESCAN  LOS VALORES EN LA TABLA
+				guardarProyectoModify();
+			}
+			else if (fechaIpro>fechaFpro){
+	        	alert("Fecha de Finalización Incorrecta");
+	        	$("#formNewProy").show("fast");
+				$('#formNewObj').fast("fast");
+	        }
+			else{
+				//Bloque Validación de Estados
+				if(estProy=="1"){ // Si estado de proyecto es Activo
+					$('[name=opActObj]').prop("disabled", false);
+					$('[name=opFinObj]').prop("disabled", false);
+					$('[name=opCanObj]').prop("disabled", false);
+					$('[name=opInaObj]').prop("disabled", false);
+				}
+				else if(estProy=="2"){ // Si estado de proyecto es Finalizado
+					$('[name=opActObj]').prop("disabled", true);
+					$('[name=opFinObj]').prop("disabled", false);
+					$('[name=opCanObj]').prop("disabled", true);
+					$('[name=opInaObj]').prop("disabled", true);
+				}
+				else if(estProy=="3"){ // Si estado de proyecto es Cancelado
+					$('[name=opActObj]').prop("disabled", true);
+					$('[name=opFinObj]').prop("disabled", true);
+					$('[name=opCanObj]').prop("disabled", false);
+					$('[name=opInaObj]').prop("disabled", true);
+				}
+				else if(estProy=="4"){ //Si estado de proyecto es Inactivo
+					$('[name=opActObj]').prop("disabled", true);
+					$('[name=opFinObj]').prop("disabled", true);
+					$('[name=opCanObj]').prop("disabled", true);
+					$('[name=opInaObj]').prop("disabled", false);
+				}
+		        //Cookies enviadas para validar fechas del formulario de objetivos
+		        $('[name=fechaIniObj]').attr('min', $.cookie('dateIniP'));
+		        $('[name=fechaIniObj]').attr('max', $.cookie('datefinP'));
+		        $('[name=fechafinObj]').attr('min', $.cookie('dateIniP'));
+		        $('[name=fechafinObj]').attr('max', $.cookie('datefinP'));
+		        //$('[name=opFinObj]').prop("disabled", false); // Element(s) are now enabled.
+		        //Se cierra el bloque de cookies enviadas al formulario de objetivos
+		        		        
+		        $('#infoCrearProy').show("fast");
+		        $('#codProy').html( $.cookie('codP') );//SE AGREGA AL div #infoCrearProy el codigo del proyecto
+		        $('#nameProy').html( $.cookie('nameP') );
 
-        if($modifcarProyecto == true){
-			//$modifcarProyecto = false;//SE HACE FALSE CUANDO SE REFRESCAN  LOS VALORES EN LA TABLA
-			guardarProyectoModify();
-		}
-		else if (fechaIpro>fechaFpro){
-        	alert("Fecha de Finalización Incorrecta");
-        	$("#formNewProy").show("fast");
-			$('#formNewObj').fast("fast");
-        }
-		else{
-			/*if(estProy="Activo"){
+		        $("#formNewProy").hide("fast");
+		        $("#tituloObjetivo").text('Agregar Objetivo');//Se actualiza por si se ha cambiado  por Modificar Proyecto
 
-			}*/
-	        //Cookies enviadas para validar fechas del formulario de objetivos
-	        $('[name=fechaIniObj]').attr('min', $.cookie('dateIniP'));
-	        $('[name=fechaIniObj]').attr('max', $.cookie('datefinP'));
-	        $('[name=fechafinObj]').attr('min', $.cookie('dateIniP'));
-	        $('[name=fechafinObj]').attr('max', $.cookie('datefinP'));
-	        //$('[name=opFinObj]').prop("disabled", false); // Element(s) are now enabled.
-	        //Se cierra el bloque de cookies enviadas al formulario de objetivos
-	        		        
-	        $('#infoCrearProy').show("fast");
-	        $('#codProy').html( $.cookie('codP') );//SE AGREGA AL div #infoCrearProy el codigo del proyecto
-	        $('#nameProy').html( $.cookie('nameP') );
+				$('#formNewObj').show("fast");
+				$('[name=codigoObj]').attr('placeholder', $.cookie('codP')+".1");
+				$('#codigoObj').attr('value', $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
+				$('[name=btnRegistroNuevoObj]').attr('value', 'Continuar');//Cambiar el nombre del boton.
 
-	        $("#formNewProy").hide("fast");
-	        $("#tituloObjetivo").text('Agregar Objetivo');//Se actualiza por si se ha cambiado  por Modificar Proyecto
-
-			$('#formNewObj').show("fast");
-			$('[name=codigoObj]').attr('placeholder', $.cookie('codP')+".1");
-			$('#codigoObj').attr('value', $.cookie('codP') +".1"  ); //codigo proyecto + .1  de primer objetivo
-			$('[name=btnRegistroNuevoObj]').attr('value', 'Continuar');//Cambiar el nombre del boton.
-
-			//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
-			$('#codProy1').html( $.cookie('codP') );
-			$('#nameProy1').html( $.cookie('nameP') );
-			$('#nameProy2').html( $.cookie('nameP') );
-			$('#dateIniProy1').html( $.cookie('dateIniP') );
-			$('#dateFinProy1').html( $.cookie('datefinP') );
-			$('#montoProy1').html( $.cookie('montoP') );
-			$('#estadoProy1').html( $.cookie('estadoP') );
-			$('#descripcionProy1').html( $.cookie('descripcionP') );
-	      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+				//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de proyecto AL ACORDEON HOME
+				$('#codProy1').html( $.cookie('codP') );
+				$('#nameProy1').html( $.cookie('nameP') );
+				$('#nameProy2').html( $.cookie('nameP') );
+				$('#dateIniProy1').html( $.cookie('dateIniP') );
+				$('#dateFinProy1').html( $.cookie('datefinP') );
+				$('#montoProy1').html( $.cookie('montoP') );
+				$('#estadoProy1').html( $.cookie('estadoP') );
+				$('#descripcionProy1').html( $.cookie('descripcionP') );
+		      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
+			}
 		}
 	}
 
@@ -1027,7 +1067,32 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 					var	fechaIObj = Date.parse($.cookie('dateIniOP'));
 				    var	fechaFobj = Date.parse($.cookie('datefinOP'));
 				    var montoObjetivo=parseInt($.cookie('montoOP'));
-				    
+				    var estObj= $.cookie('estadoOP');
+				    //Bloque Validación de Estados
+					if(estObj=="1"){ // Si estado de proyecto es Activo
+						$('[name=opActMet]').prop("disabled", false);
+						$('[name=opFinMet]').prop("disabled", false);
+						$('[name=opCanMet]').prop("disabled", false);
+						$('[name=opInaMet]').prop("disabled", false);
+					}
+					else if(estObj=="2"){ // Si estado de proyecto es Finalizado
+						$('[name=opActMet]').prop("disabled", true);
+						$('[name=opFinMet]').prop("disabled", false);
+						$('[name=opCanMet]').prop("disabled", true);
+						$('[name=opInaMet]').prop("disabled", true);
+					}
+					else if(estObj=="3"){ // Si estado de proyecto es Cancelado
+						$('[name=opActMet]').prop("disabled", true);
+						$('[name=opFinMet]').prop("disabled", true);
+						$('[name=opCanMet]').prop("disabled", false);
+						$('[name=opInaMet]').prop("disabled", true);
+					}
+					else if(estObj=="4"){ //Si estado de proyecto es Inactivo
+						$('[name=opActMet]').prop("disabled", true);
+						$('[name=opFinMet]').prop("disabled", true);
+						$('[name=opCanMet]').prop("disabled", true);
+						$('[name=opInaMet]').prop("disabled", false);
+					}
 				    //Bloque de validaciones para formulario de Objetivos
 			  		if (fechaIObj>fechaFobj){
 						alert("Fecha de Finalización Incorrecta");
@@ -1115,6 +1180,32 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 				    var montoMeta=parseInt($.cookie('montoMP'));
 				    var fechaIMet = Date.parse($.cookie('dateIniMP'));
 				    var fechaFMet = Date.parse($.cookie('datefinMP'));
+				    var estMet= $.cookie('estadoMP');
+                	//Bloque Validación de Estados
+					if(estMet=="1"){ // Si estado de proyecto es Activo
+						$('[name=opActAct]').prop("disabled", false);
+						$('[name=opFinAct]').prop("disabled", false);
+						$('[name=opCanAct]').prop("disabled", false);
+						$('[name=opInaAct]').prop("disabled", false);
+					}
+					else if(estMet=="2"){ // Si estado de proyecto es Finalizado
+						$('[name=opActAct]').prop("disabled", true);
+						$('[name=opFinAct]').prop("disabled", false);
+						$('[name=opCanAct]').prop("disabled", true);
+						$('[name=opInaAct]').prop("disabled", true);
+					}
+					else if(estMet=="3"){ // Si estado de proyecto es Cancelado
+						$('[name=opActAct]').prop("disabled", true);
+						$('[name=opFinAct]').prop("disabled", true);
+						$('[name=opCanAct]').prop("disabled", false);
+						$('[name=opInaAct]').prop("disabled", true);
+					}
+					else if(estMet=="4"){ //Si estado de proyecto es Inactivo
+						$('[name=opActAct]').prop("disabled", true);
+						$('[name=opFinAct]').prop("disabled", true);
+						$('[name=opCanAct]').prop("disabled", true);
+						$('[name=opInaAct]').prop("disabled", false);
+					}
 					if (fechaIMet>fechaFMet){
 						alert("Fecha de Finalización Incorrecta");
 						$('#formNewMeta').show("fast");//esconde el formulario de meta

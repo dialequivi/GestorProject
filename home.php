@@ -9,10 +9,10 @@
   <link rel="icon" href="../../favicon.ico">
 
   <title>Home</title>
-
   <link href="bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
-
   <link href="bootstrap-3.3.2-dist/css/navbar.css" rel="stylesheet">
+  <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/alertify.core.css" />
+  <link rel="stylesheet" href="bootstrap-3.3.2-dist/css/alertify.default.css" />
 
   <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
 </head>
@@ -271,6 +271,7 @@
               <TD>Estado: </TD>
               <TD>
                 <select class="form-control" name="estadoProy" required>
+                  <option value='' disabled selected style='display:none;'>Seleccione Estado</option>
                   <option value=1 name="opActProy">Activo</option>
                   <option value=2 name="opFinProy">Finalizado</option>
                   <option value=3 name="opCanProy">Cancelado</option>
@@ -328,10 +329,11 @@
         <tr>
           <TD>Estado: </TD>
           <TD> <select class="form-control" name="estadoObj" required>
+                <option value='' disabled selected style='display:none;'>Seleccione Estado</option>
                 <option value=1 name="opActObj" disabled>Activo</option>
                 <option value=2 name="opFinObj" disabled>Finalizado</option>
                 <option value=3 name="opCanObj" disabled>Cancelado</option>
-                <option value=4 name="opInaObj" disabled>Inactivo</option> 
+                <option value=4 name="opInaObj" disable>Inactivo</option> 
           </select> </TD>
         </tr>
         <tr>
@@ -379,11 +381,11 @@
           <tr>
             <TD>Estado: </TD>
             <TD> <select class="form-control" name="estadoMeta" required>
-                <option value=1>Activo</option>
-                <option value=2>Finalizado</option>
-                <option value=3>Cancelado</option>
-                <option value=4>Inactivo</option> 
-
+                <option value='' disabled selected style='display:none;'>Seleccione Estado</option>
+                <option value=1 name="opActMet">Activo</option>
+                <option value=2 name="opFinMet">Finalizado</option>
+                <option value=3 name="opCanMet">Cancelado</option>
+                <option value=4 name="opInaMet">Inactivo</option> 
             </select> </TD>
           </tr>
           <tr>
@@ -430,13 +432,15 @@
             </tr>
             <tr>
             <TD>Estado: </TD>
-            <TD> <select class="form-control" name="estadoActi" required>
-                <option value=1>Activo</option>
-                <option value=2>Finalizado</option>
-                <option value=3>Cancelado</option>
-                <option value=4>Inactivo</option> 
-
-            </select> </TD>
+            <TD>
+              <select class="form-control" name="estadoActi" required>
+                <option value='' disabled selected style='display:none;'>Seleccione Estado</option>
+                <option value=1 name="opActAct">Activo</option>
+                <option value=2 name="opFinAct">Finalizado</option>
+                <option value=3 name="opCanAct">Cancelado</option>
+                <option value=4 name="opInaAct">Inactivo</option> 
+              </select> 
+            </TD>
           </tr>
             <tr>
               <TD>Descripción: </TD>
@@ -749,7 +753,8 @@
     <script src="ajax.js"></script>
     <script src="jquery.cookie.js"></script>
 
-    <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-3.3.2-dist/js/alertify.js"></script>
+     <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
 
