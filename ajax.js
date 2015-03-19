@@ -693,6 +693,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	}
 
 /*Agrega un nuevo objetivo a un proyecto ya creado
+/Si se va agregar un objetivo, con el id del proyecto (previamente obtenido) se consulta el monto disponible y las fechas del proyecto
 */
 	function agregarObjetivo(){
 		//alert("Agregar Objetivo");
@@ -713,10 +714,25 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
             success: function(RespHTML) {
                 //$('#Mensaje').html(RespHTML);
                 //alert(RespHTML);
+                //console.log(RespHTML);
+                var dataProy =  RespHTML.split("_");
+                $.cookie('codOP', dataProy[0]); //el codigo se agrega incrementado en uno. Consultado de la BD
+                $.cookie('dateIniP', dataProy[1]); //para condicionar la fecha de inicio del objetivo acorde a la fecha de inicio del proyecto
+                $.cookie('datefinP', dataProy[2]);//lo mismo
+                $.cookie('montoP', dataProy[3]);//lo mismo
 
-                $.cookie('codOP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
+                $('[name=fechaIniObj]').attr({
+                	'min': $.cookie('dateIniP'),
+                	'max': $.cookie('datefinP')
+                });
+                $('[name=fechafinObj]').attr({
+                	'min': $.cookie('dateIniP'),
+                	'max': $.cookie('datefinP')
+                });
 
-                $('#codigoObj').attr('value', RespHTML );      
+		        
+
+                $('#codigoObj').attr('value', dataProy[0] );      
 
                 //$('#formNewProy').hide("fast");
 
@@ -753,19 +769,23 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
               //  alert('En breve se enviará la solicitud.');
             //},
             success: function(RespHTML) {
-                //$('#Mensaje').html(RespHTML);
-                //alert(RespHTML[0]);
-                //alert(RespHTML[1]);
-                console.log(RespHTML);
-                
-                //alert(RespHTML[1]);
 
-                //datosRegistroProy1 = RespHTML;//recibo el array
+                var dataObj = RespHTML.split("_");
+                $.cookie('codMP', dataObj[0]); //el codigo se agrega incrementado en uno. Consultado de la BD
+                $.cookie('dateIniOP', dataObj[1]);
+                $.cookie('datefinOP', dataObj[2]);
+                $.cookie('montoOP', dataObj[3]);
 
-                //alert(datosRegistroProy1[2]);
+                $('[name=fechaIniMeta]').attr({
+                	'min': $.cookie('dateIniOP'),
+                	'max': $.cookie('datefinOP')
+                });
+                $('[name=fechafinMeta]').attr({
+                	'min': $.cookie('dateIniOP'),
+                	'max': $.cookie('datefinOP')
+                });
 
-                $.cookie('codMP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
-                $('#codigoMeta').html( RespHTML); 
+                $('#codigoMeta').attr('value', dataObj[0]); 
                 //( $.cookie('codMP') );
                 //$('#codMetaP').html( RespHTML );
                 //$('#nameMetaP').html( "" );
@@ -804,20 +824,23 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
               //  alert('En breve se enviará la solicitud.');
             //},
             success: function(RespHTML) {
-                //$('#Mensaje').html(RespHTML);
-                //alert(RespHTML[0]);
-                //alert(RespHTML[1]);
-                console.log("Sigte código: ");
-                console.log(RespHTML);
-                
-                //alert(RespHTML[1]);
+            	console.log(RespHTML);
+            	var dataMeta = RespHTML.split("_");
+            	$.cookie('codAP', dataMeta[0]); //el codigo se agrega incrementado en uno. Consultado de la BD
+				$.cookie('dateIniMP', dataMeta[1]);
+				$.cookie('datefinMP', dataMeta[2]);
+				$.cookie('montoMP', dataMeta[3]);               
 
-                //datosRegistroProy1 = RespHTML;//recibo el array
+				$('[name=fechaIniActi]').attr({
+                	'min': $.cookie('dateIniMP'),
+                	'max': $.cookie('datefinMP')
+                });
+                $('[name=fechafinActi]').attr({
+                	'min': $.cookie('dateIniMP'),
+                	'max': $.cookie('datefinMP')
+                });
 
-                //alert(datosRegistroProy1[2]);
-
-                $.cookie('codAP', RespHTML); //el codigo se agrega incrementado en uno. Consultado de la BD
-                $('#codigoActi').html( RespHTML); 
+                $('#codigoActi').attr('value', dataMeta[0]); 
                 //( $.cookie('codMP') );
                 //$('#codMetaP').html( RespHTML );
                 //$('#nameMetaP').html( "" );
@@ -961,18 +984,12 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 
     function primerObjetivo(event){
    		event.preventDefault();
-   		var consultaSaldo;
-   		if($primerObjetivo == true){//SE va a agregar un nuevo objetivo a un proyecto determinado
-   			consultaSaldo = $.cookie('codP');
-   		}
-
 		$.ajax({
 			type: "POST",
 			url: 'php/evitarActualizacion.php',
 			dataType: "html",
             data: {
-            	codigoProyMontoDisp: consultaSaldo //Si se va agregar un objetivo, con el id del proyecto (previamente obtenido) se consulta el monto disponible del proyecto
-            									//Si se está creando un nuevo proyecto, obviamente el id del proyecto aún no estará resgistrado en la BD.
+            	codigoProyMontoDisp: "consultaSaldo" 
             },
             success: function(RespHTML) {
             	
@@ -991,9 +1008,6 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 					//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
 					$.cookie('codOP', $.cookie('codP')+".1"  );
 					console.log("primer ojetivo false");
-
-
-
 				}
 				else if($modificarObjetivo == true){
 					//$modificarObjetivo = false; //SE HACE FALSE CUANDO SE REFRESCAN LOS VALORES EN LA TABLA
@@ -1003,19 +1017,12 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 				}
 
 				if($modificarObjetivo == false){
-				    //alert($.isNumeric($.cookie('montoOP')));
-				    var montoProyecto;
-				    if(RespHTML != "-1"){//"-1" esta en el echo de evitar actualizacion.php del primer if
-						montoProyecto = parseInt(RespHTML);
-					} 
-					else{
-						montoProyecto=parseInt($.cookie('montoP'));
-					}
 
-				    
+				    var	montoProyecto=parseInt($.cookie('montoP'));
+					var	fechaIObj = Date.parse($.cookie('dateIniOP'));
+				    var	fechaFobj = Date.parse($.cookie('datefinOP'));
 				    var montoObjetivo=parseInt($.cookie('montoOP'));
-				    var fechaIObj = Date.parse($.cookie('dateIniOP'));
-				    var fechaFobj = Date.parse($.cookie('datefinOP'));
+				    
 				    //Bloque de validaciones para formulario de Objetivos
 			  		if (fechaIObj>fechaFobj){
 						alert("Fecha de Finalización Incorrecta");
@@ -1109,7 +1116,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 			        	$('#formNewActi').hide("fast");//muestra el formulario de actividad
 					}
 					else if(montoMeta>montoObjetivo || montoMeta<0){
-						alert("Monto de Meta no puede ser mayor al monto del Objetivo");
+						alert("Monto de Meta no puede ser mayor al monto del Objetivo. Monto disponible $"+montoObjetivo);
 						$('#formNewMeta').show("fast");//esconde el formulario de meta
 			        	$('#formNewActi').hide("fast");//muestra el formulario de actividad
 					}
@@ -1196,7 +1203,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 						alert("Fecha de Finalización Incorrecta");
 					}
 					else if(montoAct>montoMet || montoAct<0){
-						alert("Monto de Actividad no puede ser mayor al monto de la Meta");
+						alert("Monto de Actividad no puede ser mayor al monto de la Meta. Monto disponible $"+montoMet);
 					}
 					else{	
 						//EL SIGUENTE BLOQUE ES PARA ENVIAR LAS COOKIES de ACTIVIDAD AL ACORDEON HOME

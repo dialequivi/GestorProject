@@ -16,19 +16,21 @@ if($row = mysql_fetch_array($result)){
 
 $sigteCod = explode(".",$ultimo);
 
-//$respuesta = new stdClass();//nuevo Ajax
+//OBTENEMOS ADEMAS LAS FECHAS Y EL MONTO DISPONIBLE PARA CONDICIONAR LE OBJETIVO A AGREGAR
+$saldoProy = "SELECT pro_fecha_inicio, pro_fecha_fin, pro_monto_disponible FROM proyecto WHERE pro_id='$codProy'";
+$resultado = mysql_query($saldoProy);
+$dataProyecto = array();
+if($row2 = mysql_fetch_array($resultado)){
+	$dataProyecto[0] = $row2['pro_fecha_inicio'];
+	$dataProyecto[1] = $row2['pro_fecha_fin'];
+	$dataProyecto[2] = $row2['pro_monto_disponible'];		
+	//Se ha encontrado el ID del proyecto en la BD para agregar el objetivo. Entonces se consulta el monto disponible y fechas
+	//echo $row['pro_fecha_inicio']."_".$row['pro_fecha_fin']."_".$row['pro_monto_disponible'];
+}
 
-/*if(!$result){
-	echo "Error en la sentencia SQL ".mysql_error();
-	//$respuesta->mensaje ="Error al consultar la base de datos.";//nuevo Ajax
-}else if( strcmp($obtenido, "disponible") != 0 ){
-	$obtenido = "no disponible";
 
-	//echo "<br><a href='agregarObjetivo.html'> Agregar objetivo </a> ";
-	//$respuesta->mensaje = "Se hizo la consulta.";//nuevo Ajax
-}*/
 
-echo $sigteCod[0].".".($sigteCod[1]+1);
+echo $sigteCod[0].".".($sigteCod[1]+1)."_".$dataProyecto[0]."_".$dataProyecto[1]."_".$dataProyecto[2];
 
 @mysql_close($conexion);
 
