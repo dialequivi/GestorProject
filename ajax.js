@@ -916,6 +916,7 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
         $.cookie('descripcionP', $('[name=descripcionProy]').val() );
         var fechaIpro = Date.parse($.cookie('dateIniP'));
 	    var fechaFpro = Date.parse($.cookie('datefinP'));
+	    var estProy= $.cookie('estadoP');
 
         if($modifcarProyecto == true){
 			//$modifcarProyecto = false;//SE HACE FALSE CUANDO SE REFRESCAN  LOS VALORES EN LA TABLA
@@ -927,11 +928,15 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 			$('#formNewObj').fast("fast");
         }
 		else{
+			/*if(estProy="Activo"){
+
+			}*/
 	        //Cookies enviadas para validar fechas del formulario de objetivos
 	        $('[name=fechaIniObj]').attr('min', $.cookie('dateIniP'));
 	        $('[name=fechaIniObj]').attr('max', $.cookie('datefinP'));
 	        $('[name=fechafinObj]').attr('min', $.cookie('dateIniP'));
 	        $('[name=fechafinObj]').attr('max', $.cookie('datefinP'));
+	        //$('[name=opFinObj]').prop("disabled", false); // Element(s) are now enabled.
 	        //Se cierra el bloque de cookies enviadas al formulario de objetivos
 	        		        
 	        $('#infoCrearProy').show("fast");

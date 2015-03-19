@@ -271,10 +271,10 @@
               <TD>Estado: </TD>
               <TD>
                 <select class="form-control" name="estadoProy" required>
-                  <option value=1>Activo</option>
-                  <option value=2>Finalizado</option>
-                  <option value=3>Cancelado</option>
-                  <option value=4>Inactivo</option> 
+                  <option value=1 name="opActProy">Activo</option>
+                  <option value=2 name="opFinProy">Finalizado</option>
+                  <option value=3 name="opCanProy">Cancelado</option>
+                  <option value=4 name="opInaProy">Inactivo</option> 
                 </select> 
               </TD>
             </tr>
@@ -328,10 +328,10 @@
         <tr>
           <TD>Estado: </TD>
           <TD> <select class="form-control" name="estadoObj" required>
-                <option value=1>Activo</option>
-                <option value=2>Finalizado</option>
-                <option value=3>Cancelado</option>
-                <option value=4>Inactivo</option> 
+                <option value=1 name="opActObj" disabled>Activo</option>
+                <option value=2 name="opFinObj" disabled>Finalizado</option>
+                <option value=3 name="opCanObj" disabled>Cancelado</option>
+                <option value=4 name="opInaObj" disabled>Inactivo</option> 
           </select> </TD>
         </tr>
         <tr>
