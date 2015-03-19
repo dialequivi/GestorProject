@@ -7,13 +7,27 @@ mysql_select_db($basedatos) or die ("Error al conectar con bases de datos: ".mys
 		$codP = $_POST['codigoProyMontoDisp'];
 		//echo "El código de proyecto para consultar el monto disponible es: ".$codiProy;
 
-		$saldoProy = "SELECT pro_monto_disponible FROM proyecto WHERE pro_id='$codP'";
+		$saldoProy = "SELECT pro_fecha_inicio, pro_fecha_fin, pro_monto_disponible FROM proyecto WHERE pro_id='$codP'";
 		$resultado = mysql_query($saldoProy);
-		$montoProyDispo;
-		if($row = mysql_fetch_array($resultado)){
+		
+		if(mysql_num_rows($resultado) > 0){
 			//trim para eleminar espacios en blanco de la cadena
-			$montoProyDispo= trim($row[0]);
-			echo $montoProyDispo; //Se ha encontrado el ID del proyecto en la BD para agregar el objetivo. Entonces se consulta el monto disponible
+			//$montoProyDispo= trim($row[0]);
+			//echo $montoProyDispo; //Se ha encontrado el ID del proyecto en la BD para agregar el objetivo. Entonces se consulta el monto disponible
+			$datosProyect = array();
+			$a = 0;
+			while($row = mysql_fetch_array($resultado)){
+				if($a == 0){
+					$datosProyect[] = $row['pro_fecha_inicio'];
+				}else if($a == 1){
+					$datosProyect[] = $row['pro_fecha_fin'];
+				}else{
+					$datosProyect[] = $row['pro_monto_disponible'];
+				}
+				$a++;
+
+			}
+			echo $datosProyect;
 		}
 		else{
 			echo "-1"; // Es un pr
