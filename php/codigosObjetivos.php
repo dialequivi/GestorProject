@@ -36,11 +36,21 @@ if($row = mysql_fetch_array($result2)){
 
 $rest = substr($llaves, -1);//devuelve el ultimo digito
 $ini = substr($llaves, 0, -1);//devuelve los primero caracteres menos el ultimo
-//console.log("ultimo digi: ".$rest);
-//$sigteCod = explode(".",$llaves);
 
-//echo $sigteCod[0].".".($sigteCod[1]+1);
-echo $ini.($rest+1);
+
+//OBTENEMOS ADEMAS LAS FECHAS Y EL MONTO DISPONIBLE PARA CONDICIONAR LA META A AGREGAR
+$saldoObj = "SELECT obj_fecha_inicio, obj_fecha_fin, obj_monto_disponible FROM objetivo WHERE obj_id='$codOP'";
+$resultado = mysql_query($saldoObj);
+$dataObj = array();
+if($row2 = mysql_fetch_array($resultado)){
+	$dataObj[0] = $row2['obj_fecha_inicio'];
+	$dataObj[1] = $row2['obj_fecha_fin'];
+	$dataObj[2] = $row2['obj_monto_disponible'];		
+	//Se ha encontrado el ID del proyecto en la BD para agregar el objetivo. Entonces se consulta el monto disponible y fechas
+	//echo $row['pro_fecha_inicio']."_".$row['pro_fecha_fin']."_".$row['pro_monto_disponible'];
+}
+
+echo $ini.($rest+1)."_".$dataObj[0]."_".$dataObj[1]."_".$dataObj[2];
 
 //echo json_encode($llaves);//mario
 //echo json_encode( $sigteCod[0].".".($sigteCod[1]+1) );
