@@ -958,16 +958,27 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 	      	//SE CIERRA EL BLOQUE DE COOKIES ENVIADAS AL ACORDEON DEL HOME
 		}
 	}
+
     function primerObjetivo(event){
    		event.preventDefault();
+   		var consultaSaldo;
+   		if($primerObjetivo == true){//SE va a agregar un nuevo objetivo a un proyecto determinado
+   			consultaSaldo = $.cookie('codP');
+   		}
+
 		$.ajax({
 			type: "POST",
 			url: 'php/evitarActualizacion.php',
 			dataType: "html",
-            data: $('#registrarObj').serialize(),
+            data: {
+            	codigoProyMontoDisp: consultaSaldo //Si se va agregar un objetivo, con el id del proyecto (previamente obtenido) se consulta el monto disponible del proyecto
+            									//Si se está creando un nuevo proyecto, obviamente el id del proyecto aún no estará resgistrado en la BD.
+            },
             success: function(RespHTML) {
-				console.log(RespHTML); 
+            	
+				console.log(RespHTML);
 
+				
 				//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
 		   			$.cookie('dateIniOP', $('[name=fechaIniObj]').val());
 			    	$.cookie('datefinOP', $('[name=fechafinObj]').val());
@@ -980,6 +991,9 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 					//CAPTURANDO LOS DATOS DEL FORMULARIO DE NUEVO OBJETIVO
 					$.cookie('codOP', $.cookie('codP')+".1"  );
 					console.log("primer ojetivo false");
+
+
+
 				}
 				else if($modificarObjetivo == true){
 					//$modificarObjetivo = false; //SE HACE FALSE CUANDO SE REFRESCAN LOS VALORES EN LA TABLA
@@ -987,9 +1001,18 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 					guardarObjetivoModify();
 					console.log("modificar objetivo");
 				}
+
 				if($modificarObjetivo == false){
 				    //alert($.isNumeric($.cookie('montoOP')));
-				    var montoProyecto=parseInt($.cookie('montoP'));
+				    var montoProyecto;
+				    if(RespHTML != "-1"){//"-1" esta en el echo de evitar actualizacion.php del primer if
+						montoProyecto = parseInt(RespHTML);
+					} 
+					else{
+						montoProyecto=parseInt($.cookie('montoP'));
+					}
+
+				    
 				    var montoObjetivo=parseInt($.cookie('montoOP'));
 				    var fechaIObj = Date.parse($.cookie('dateIniOP'));
 				    var fechaFobj = Date.parse($.cookie('datefinOP'));
@@ -1000,7 +1023,8 @@ $(document).ready(function() {//Se ejecuta unicamente cuando la pagina se haya c
 			        	$('#formNewMeta').hide("fast");//muestra el formulario de meta
 					}//Si la fecha inicial es mayor a la fecha final arroja la notificación e impide el cambio de formulario
 					else if(montoObjetivo>montoProyecto || montoObjetivo<0){
-						alert("Monto de Objetivo debe ser menor o igual al monto del Proyecto y mayor que cero");
+						alert("Monto de Objetivo debe ser menor o igual al monto del Proyecto y mayor que cero."+
+							" El monto disponible es $"+montoProyecto);
 						$('#formNewObj').show("fast");//esconde el formulario de objetivo
 			        	$('#formNewMeta').hide("fast");//muestra el formulario de meta
 					}//Si el monto del objetivo supera el monto del proyecto arroja la notificación, tambien valida que no sea negativo

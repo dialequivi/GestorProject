@@ -7,6 +7,15 @@ mysql_select_db($basedatos) or die ("Error al conectar con bases de datos: ".mys
 //$sql = "INSERT INTO objetivo VALUES ('$_POST[codigoObj]','$_POST[nombreObj]', '$_POST[fechaIniObj]', '$_POST[fechafinObj]', '$_POST[montoObj]', '$_POST[descripcionObj]',    'PRDIMA01'    ,'$_POST[estadoObj]')";
 
 $codP=$_COOKIE['codP'];
+
+$saldoProy = "SELECT pro_monto_disponible FROM proyecto WHERE pro_id='$codP'";
+$resultSaldo = mysql_query($saldoProy);
+
+if($row = mysql_fetch_array($resultSaldo)){
+	//trim para eleminar espacios en blanco de la cadena
+	$montoProyDispo= trim($row[0]);
+}
+
 $codOP=$_COOKIE['codOP']; $nameOP=$_COOKIE['nameOP']; $dateIniOP=$_COOKIE['dateIniOP']; $datefinOP=$_COOKIE['datefinOP']; 
 $montoOP=$_COOKIE['montoOP']; $descriOP=$_COOKIE['descripOP']; $estadoOP=$_COOKIE['estadoOP'];
 
